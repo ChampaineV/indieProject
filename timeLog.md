@@ -17,4 +17,5 @@ Tasks for this week:
   * Complete problem statement
   * Complete User Stories
   * Determine project tasks
-  * 
+  * Learned about Log4j2 and Junit
+  * Submit Issue for Project Checkpoint 1
