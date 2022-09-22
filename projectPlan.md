@@ -5,7 +5,7 @@
 - [ ] Create database
 - [x] Design CSS
 - [x] new user jsp
-- [ ] add user controller (java class)
+- [x] add user controller (java class)
 - [ ] user entity (java class)
 - [ ] user table
 - [ ] user dao to add user to db (java class)
