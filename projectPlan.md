@@ -14,7 +14,7 @@
 - [ ] Weekly reflection
 
 ### Week 5
-### This week's focus is the 
+### This week's focus is the User Authentication
 
 ### Week 15 
 - [ ] Final Presentation
