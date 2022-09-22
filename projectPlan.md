@@ -3,8 +3,8 @@
 ### Week 4
 ### This week's focus is the User Sign Up Story
 - [ ] Create database
-- [ ] Design CSS
-- [ ] new user jsp
+- [x] Design CSS
+- [x] new user jsp
 - [ ] add user controller (java class)
 - [ ] user entity (java class)
 - [ ] user table
