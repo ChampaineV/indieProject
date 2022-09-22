@@ -31,7 +31,9 @@ display the work completed for the day.
   * JUnite Tests
 * IDE: IntelliJ IDEA
 ### Design
-
-### [Project Plan]
+* [User Stories](DesignDocuments/userStories.md)
+* [Tasks](DesignDocuments/tasks.md)
+* [Screen Design](DesignDocuments/screens.md)
+### [Project Plan] (projectPlan.md)
 
 ### Documentation of Progress
