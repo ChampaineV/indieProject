@@ -6,7 +6,7 @@
 - [x] Design CSS
 - [x] new user jsp
 - [x] add user controller (java class)
-- [ ] user entity (java class)
+- [x] user entity (java class)
 - [ ] user table
 - [ ] user dao to add user to db (java class)
 - [ ] unit test dao add user functionality
