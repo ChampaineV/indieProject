@@ -5,4 +5,5 @@ package edu.productivity.entity;
  * @author lvang
  */
 public class User {
+
 }
