@@ -5,11 +5,31 @@ package edu.productivity.entity;
  * @author lvang
  */
 public class User {
+    private int id;
     private String firstName;
     private String lastName;
     private String userName;
     private String password;
     private String dateOfBirth;
+
+    public User() {}
+
+    public User (int id, String firstName, String lastName, String userName, String password, String dateOfBirth) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -50,4 +70,5 @@ public class User {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 }
