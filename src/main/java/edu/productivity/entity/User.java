@@ -1,15 +1,30 @@
 package edu.productivity.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.ejb.Local;
+import javax.persistence.*;
+
 /**
  * Class that represents a user
  * @author lvang
  */
+@Entity(name = "User")
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     private int id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "password")
     private String password;
+    @Column(name = "date_of_birth")
     private String dateOfBirth;
 
     public User() {}
