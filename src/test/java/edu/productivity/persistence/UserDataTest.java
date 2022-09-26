@@ -22,8 +22,10 @@ public class UserDataTest {
 
     @BeforeEach
     void setUp() {
-        userData = new UserData();
-        user = new User();
+        edu.productivity.test.util.Database database = edu.productivity.test.util.Database.getInstance();
+        database.runSQL("cleandb.sql");
+
+        dao = new UserDao();
     }
 
     @Test

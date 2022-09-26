@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import javax.persistence.criteria.*;
+import java.util.*;
 
 public class UserData {
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -57,5 +59,24 @@ public class UserData {
         session.delete(user);
         transaction.commit();
         session.close();
+    }
+
+    /**
+     * Returns a list of all the users
+     * @return list of all the users
+     */
+    public List<User> getAll() {
+
+        Session session = sessionFactory.openSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery( User.class );
+        Root<User> root = query.from( User.class );
+        List<User> users = session.createQuery( query ).getResultList();
+
+        logger.debug("The list of users " + users);
+        session.close();
+
+        return users;
     }
 }
