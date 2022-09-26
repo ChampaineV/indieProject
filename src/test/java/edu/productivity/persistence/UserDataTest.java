@@ -16,7 +16,7 @@ class UserDataTest {
     void setUp() {
         userDao = new UserData();
 
-        edu.matc.test.util.Database database = edu.matc.test.util.Database.getInstance();
+        edu.productivity.test.util.Database database = edu.productivity.test.util.Database.getInstance();
         database.runSQL("cleandb.sql");
     }
 
