@@ -11,6 +11,11 @@ public class UserData {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
+    /**
+     * Insert user
+     * @param user User to be inserted
+     * @return the id of the inserted user
+     */
     public int insert(User user) {
         int id = 0;
         Session session = sessionFactory.openSession();
