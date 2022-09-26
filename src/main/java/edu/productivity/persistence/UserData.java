@@ -9,6 +9,10 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.*;
 import java.util.*;
 
+/**
+ * Data access class to crud users.
+ * @author lvang
+ */
 public class UserData {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
@@ -71,7 +75,7 @@ public class UserData {
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery( User.class );
-        Root<User> root = query.from( User.class );
+        Root<User> root = query.from(User.class);
         List<User> users = session.createQuery( query ).getResultList();
 
         logger.debug("The list of users " + users);
