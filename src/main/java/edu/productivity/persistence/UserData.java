@@ -33,13 +33,13 @@ public class UserData {
     }
 
     /**
-     * Get user by first name
-     * @param firstName User's first name
-     * @return user User with the entered first name
+     * Get user by id
+     * @param id User's id
+     * @return user User with the id
      */
-    public User getByFirstName(String firstName) {
+    public User getById(int id) {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, firstName);
+        User user = session.get(User.class, id);
         session.close();
         return user;
     }
