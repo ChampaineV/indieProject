@@ -20,4 +20,37 @@ public class UserData {
         session.close();
         return id;
     }
+
+    /**
+     * Get user by first name
+     * @param firstName User's first name
+     * @return user User with the entered first name
+     */
+    public User getByFirstName(String firstName) {
+        Session session = sessionFactory.openSession();
+        User user = session.get(User.class, firstName);
+        session.close();
+        return user;
+    }
+    /**
+     * Update user
+     * @param user User to be inserted or updated
+     */
+    public void saveOrUpdate(User user) {
+        Session session = sessionFactory.openSession();
+        session.saveOrUpdate(user);
+        session.close();
+    }
+
+    /**
+     * Delete a user
+     * @param user User to be deleted
+     */
+    public void delete(User user) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(user);
+        transaction.commit();
+        session.close();
+    }
 }
