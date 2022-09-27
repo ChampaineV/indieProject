@@ -27,8 +27,8 @@ they've completed in a span of time and understand how well they use their time 
 * Independent Research Topic/s
   * Google Tasks API
 * Unit Testing
-  * JUnit Tests
-* IDE: IntelliJ IDEA
+  * JUnit 5 Tests
+* IDE: IntelliJ IDEA 2021.2
 ### Design
 * [User Stories](DesignDocuments/userStories.md)
 * [Tasks](DesignDocuments/tasks.md)
@@ -36,3 +36,4 @@ they've completed in a span of time and understand how well they use their time 
 ### [Project Plan](projectPlan.md)
 
 ### Documentation of Progress
+* [Time Log](timeLog.md)
