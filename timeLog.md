@@ -19,3 +19,12 @@ Tasks for this week:
   * Determine project tasks
   * Learned about Log4j2 and Junit
   * Submit Issue for Project Checkpoint 1
+
+### Week 4 
+Tasks for this week:
+ * Make changes according to comments and questions from Paula
+ * Create database and user classes to use full CRUD 
+ * Learn about Hibernate and IntelliJ's database view
+
+### Week 5 
+Tasks for this week: 
