@@ -2,19 +2,20 @@
 
 ### Week 4
 ### This week's focus is the User Sign Up Story
-- [ ] Create database
+- [x] Create database
 - [x] Design CSS
 - [x] new user jsp
 - [x] add user controller (java class)
 - [x] user entity (java class)
-- [ ] user table
-- [ ] user dao to add user to db (java class)
-- [ ] unit test dao add user functionality
+- [x] user table
+- [x] user dao to add user to db (java class)
+- [x] unit test dao add user functionality
 - [ ] test round trip (front end to back end)
 - [ ] Weekly reflection
 
 ### Week 5
 ### This week's focus is the User Authentication
+- [ ] ???
 
 ### Week 15 
 - [ ] Final Presentation
