@@ -57,8 +57,11 @@ class UserDataTest {
     }
 
     @Test
-    void getUsersByLastNameSuccess() {
-
+    void getUsersByPropertyLikeSuccess() {
+        User newUser = new User(4, "Alexis", "Smith", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
+        userDao.insert(newUser);
+        List<User> users = userDao.getUsersByPropertyLike("lastName", "Smith");
+        assertEquals(2, users.size());
     }
 
     @Test

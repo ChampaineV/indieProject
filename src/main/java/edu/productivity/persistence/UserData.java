@@ -66,15 +66,15 @@ public class UserData {
         session.close();
     }
 
-    public List<User> getUsersByLastName(String lastName, String value) {
+    public List<User> getUsersByPropertyLike(String propertyName, String value) {
         Session session = sessionFactory.openSession();
 
-        logger.debug("Searching for user with {} = {}",  lastName, value);
+        logger.debug("Searching for user with {} = {}",  propertyName, value);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery( User.class );
         Root<User> root = query.from(User.class);
-        Expression<String> propertyPath = root.get(lastName);
+        Expression<String> propertyPath = root.get(propertyName);
 
         query.where(builder.like(propertyPath, "%" + value + "%"));
 
