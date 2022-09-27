@@ -28,3 +28,6 @@ Tasks for this week:
 
 ### Week 5 
 Tasks for this week: 
+* Learn how to handle One-To-Many relationships, streamline our code, and improve our unit testing. 
+* Read and demo Google Tasks API
+* 
