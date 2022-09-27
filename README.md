@@ -1,24 +1,23 @@
 # Leischow Vang Individual Project
 
-This repository will ...
-
 ### Problem Statement
-To increase productivity, this Java application will help students track their work and be productive with
-their time. The application will have the ability to create a task list, utilize a timer to pace themselves.
-The application will have simple UI to lessen distractions. After studying, the application will record and
-display the work completed for the day. 
+Students struggle to work in an organized and productively fashion. To solve this problem, this Java application will 
+help students track their work and be productive with their time. The application will have the ability to create a task
+list, utilize a timer to pace themselves. The application will have simple UI to lessen distractions. After studying, 
+the application will record and display the work completed for the day. This will help students measure the amount of work 
+they've completed in a span of time and understand how well they use their time working. 
 
 ### Project Technologies/Techniques
 * Security/Authentication
-  * Tomcat's JDBC Realm Authentication
+  * Amazon's Cognito
 * Database
   * MySQl 8.0.30
 * ORM Framework
-  * Hibernate
+  * Hibernate ORM version 5.4.4 Stable
 * Dependency Management
   * Maven
 * CSS
-  * tbd
+  * Bootstrap 5.2.1
 * Data Validation
   * tbd
 * Logging
@@ -28,12 +27,12 @@ display the work completed for the day.
 * Independent Research Topic/s
   * Google Tasks API
 * Unit Testing
-  * JUnite Tests
+  * JUnit Tests
 * IDE: IntelliJ IDEA
 ### Design
 * [User Stories](DesignDocuments/userStories.md)
 * [Tasks](DesignDocuments/tasks.md)
 * [Screen Design](DesignDocuments/screens.md)
-### [Project Plan] (projectPlan.md)
+### [Project Plan](projectPlan.md)
 
 ### Documentation of Progress
