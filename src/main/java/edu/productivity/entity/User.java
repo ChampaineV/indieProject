@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.ejb.Local;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Class that represents a user
@@ -25,11 +27,11 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "date_of_birth")
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     public User() {}
 
-    public User (int id, String firstName, String lastName, String userName, String password, String dateOfBirth) {
+    public User (int id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -78,12 +80,12 @@ public class User {
         this.password = password;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth);
     }
 
     @Override
@@ -96,5 +98,17 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if ( this == o ) {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() ) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals( id, user.id );
     }
 }

@@ -3,7 +3,7 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/productivityapp</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">Leischow</property>
-        <property name="connection.password">SoundlessVoice202</property>
+        <property name="connection.password">Soundlessvoice202</property>
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
         <property name="hibernate.c3p0.timeout">300</property>
