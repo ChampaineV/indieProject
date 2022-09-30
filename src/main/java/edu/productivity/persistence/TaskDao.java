@@ -18,9 +18,9 @@ import java.util.List;
  * @author lvang
  */
 public class TaskDao {
+
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
-
     /**
      * Insert task
      * @param task Task to be inserted
