@@ -31,7 +31,7 @@ public class User {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Task> tasks = new HashSet<>;
+    private Set<Task> tasks = new HashSet<>();
 
     public User() {}
 
