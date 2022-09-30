@@ -1,15 +1,20 @@
 package edu.productivity.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity(name = "Task")
 @Table(name = "task")
 public class Task {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int id;
     private String task_name;
     private String description;
+    @ManyToOne
     private User user;
 
     public Task(){
