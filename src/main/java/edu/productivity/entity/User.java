@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.ejb.Local;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class that represents a user
@@ -28,6 +30,8 @@ public class User {
     private String password;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+
+    private Set<Task> tasks = new HashSet<>;
 
     public User() {}
 
@@ -98,6 +102,14 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
