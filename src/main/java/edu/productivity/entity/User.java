@@ -92,18 +92,6 @@ public class User {
         this.dateOfBirth = LocalDate.parse(dateOfBirth);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                '}';
-    }
-
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -120,6 +108,17 @@ public class User {
     public void removeTask(Task task) {
         tasks.remove(task);
         task.setUser(null);
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                '}';
     }
 
     @Override
