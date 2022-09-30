@@ -30,7 +30,7 @@ public class User {
     private String password;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Task> tasks = new HashSet<>;
 
     public User() {}
@@ -110,6 +110,16 @@ public class User {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        task.setUser(this);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+        task.setUser(null);
     }
 
     @Override
