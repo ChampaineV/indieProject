@@ -12,15 +12,16 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
-    private String task_name;
+    @Column(name = "task_name")
+    private String taskName;
     private String description;
     @ManyToOne
     private User user;
 
     public Task(){
     }
-    public Task(String task_name, String description, User user) {
-        this.task_name = task_name;
+    public Task(String taskName, String description, User user) {
+        this.taskName = taskName;
         this.description = description;
     }
 
@@ -32,12 +33,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getTask_name() {
-        return task_name;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public void setTask_name(String task_name) {
-        this.task_name = task_name;
+    public void setTaskName(String task_name) {
+        this.taskName = taskName;
     }
 
     public String getDescription() {
@@ -82,7 +83,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", task_name='" + task_name + '\'' +
+                ", task_name='" + taskName + '\'' +
                 ", description='" + description + '\'' +
                 ", user=" + user +
                 '}';

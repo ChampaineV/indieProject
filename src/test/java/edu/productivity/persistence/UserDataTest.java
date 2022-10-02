@@ -42,7 +42,7 @@ class UserDataTest {
         int id = userDao.insert(newUser);
         assertNotEquals(0, id);
         assertNotNull(newUser);
-        assertTrue(userDao.getById(4).equals(newUser));
+        assertTrue(userDao.getById(id).equals(newUser));
         assertEquals(1, newUser.getTasks().size());
     }
 
