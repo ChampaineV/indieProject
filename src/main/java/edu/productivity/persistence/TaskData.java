@@ -91,7 +91,7 @@ public class TaskData {
      * Returns a list of all the tasks
      * @return list of all the tasks
      */
-    public List<Task> getAll() {
+    public List<Task> getAllTasks() {
 
         Session session = sessionFactory.openSession();
 

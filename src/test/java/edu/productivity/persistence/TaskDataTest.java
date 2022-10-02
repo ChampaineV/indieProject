@@ -1,9 +1,12 @@
 package edu.productivity.persistence;
 
+import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +43,8 @@ class TaskDataTest {
     }
 
     @Test
-    void getAll() {
+    void getAllTasksSuccess() {
+        List<Task> tasks = taskDao.getAllTasks();
+        assertEquals(6, tasks.size());
     }
 }
