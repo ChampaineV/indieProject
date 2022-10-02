@@ -23,6 +23,7 @@ public class Task {
     public Task(String taskName, String description, User user) {
         this.taskName = taskName;
         this.description = description;
+        this.user = user;
     }
 
     public int getId() {
