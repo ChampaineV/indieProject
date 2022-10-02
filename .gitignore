@@ -47,7 +47,3 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-
-#Stuff that shouldn't be shown lol
-src/main/resources/database.properties
-src/main/resources/hibernate.cfg.xml
