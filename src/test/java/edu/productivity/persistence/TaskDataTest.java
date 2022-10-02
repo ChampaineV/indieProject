@@ -35,7 +35,9 @@ class TaskDataTest {
     }
 
     @Test
-    void delete() {
+    void deleteTaskSuccess() {
+        taskDao.delete(taskDao.getById(2));
+        assertNull(taskDao.getById(2));
     }
 
     @Test
