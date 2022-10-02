@@ -55,8 +55,9 @@ class UserDataTest {
 
     @Test
     void saveOrUpdateSuccess() {
+        String newLastName = "Rockwell";
         User user =  userDao.getById(1);
-        user.setLastName("Rockwell");
+        user.setLastName(newLastName);
         userDao.saveOrUpdate(user);
         assertTrue(userDao.getById(1).equals(user));
     }
