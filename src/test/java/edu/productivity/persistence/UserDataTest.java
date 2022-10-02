@@ -35,12 +35,8 @@ class UserDataTest {
     @Test
     void getByIdSuccess() {
         User retrievedUser = userDao.getById(3);
+        assertNotNull(retrievedUser);
         assertEquals("Morgan", retrievedUser.getFirstName());
-        assertEquals("Matthews", retrievedUser.getLastName());
-        assertEquals("mMatthews21", retrievedUser.getUserName());
-        assertEquals("password3", retrievedUser.getPassword());
-        assertEquals(LocalDate.parse("2001-03-16"), retrievedUser.getDateOfBirth());
-        assertEquals(3, retrievedUser.getId());
     }
 
     @Test
