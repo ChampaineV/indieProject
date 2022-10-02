@@ -17,7 +17,7 @@ import java.util.List;
  * Data access class to crud tasks.
  * @author lvang
  */
-public class TaskDao {
+public class TaskData {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
