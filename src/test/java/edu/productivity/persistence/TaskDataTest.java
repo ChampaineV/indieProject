@@ -1,11 +1,13 @@
 package edu.productivity.persistence;
 
 import edu.productivity.entity.Task;
+import edu.productivity.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,11 +25,24 @@ class TaskDataTest {
     }
 
     @Test
-    void insert() {
+    void insertTaskSuccess() {
+        UserData userDao = new UserData();
+        User user = userDao.getById(1);
+        String taskName = "Organize meeting with group";
+        String taskDescription = "Organize a meeting next week to discuss next steps";
+        Task newTask = new Task(taskName, taskDescription, user);
+        user.addTask(newTask);
+        int id = taskDao.insert(newTask);
+        assertNotEquals(0, id);
+        Task insertedTask = taskDao.getById(id);
+        assertTrue(taskDao.getById(id).equals(insertedTask));
     }
 
     @Test
     void getById() {
+        Task retrievedTask = taskDao.getById(3);
+        assertNotNull(retrievedTask);
+        assertTrue(taskDao.getById(3).equals(retrievedTask));
     }
 
     @Test

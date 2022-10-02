@@ -50,7 +50,7 @@ class UserDataTest {
     void getByIdSuccess() {
         User retrievedUser = userDao.getById(3);
         assertNotNull(retrievedUser);
-        assertEquals("Morgan", retrievedUser.getFirstName());
+        assertTrue(userDao.getById(3).equals(retrievedUser));
     }
 
     @Test
