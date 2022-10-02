@@ -72,4 +72,12 @@ class TaskDataTest {
         List<Task> tasks = taskDao.getAllTasks();
         assertEquals(6, tasks.size());
     }
+
+    @Test
+    void getByIdVerifyUserSuccess() {
+        Task retrievedTask = taskDao.getById(1);
+        assertNotNull(retrievedTask);
+        assertEquals("Read American History before Saturday", retrievedTask.getDescription());
+        assertEquals("Ellen", retrievedTask.getUser().getFirstName());
+    }
 }
