@@ -31,7 +31,13 @@ class TaskDataTest {
     }
 
     @Test
-    void saveOrUpdate() {
+    void saveOrUpdateTasksSuccess() {
+        String newDescription = "Complete next step for indie project before Wednesday";
+        Task taskToUpdate = taskDao.getById(3);
+        taskToUpdate.setDescription(newDescription);
+        taskDao.saveOrUpdate(taskToUpdate);
+        Task retrievedTask = taskDao.getById(3);
+        assertTrue(taskDao.getById(3).equals(retrievedTask));
     }
 
     @Test

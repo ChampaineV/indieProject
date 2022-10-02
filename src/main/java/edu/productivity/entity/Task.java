@@ -3,6 +3,7 @@ package edu.productivity.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "Task")
 @Table(name = "task")
@@ -91,5 +92,17 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if ( this == o ) {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() ) {
+            return false;
+        }
+        Task task = (Task) o;
+        return Objects.equals( id, task.id );
     }
 }
