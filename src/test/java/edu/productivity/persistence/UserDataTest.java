@@ -33,6 +33,19 @@ class UserDataTest {
     }
 
     @Test
+    void insertWithTaskSuccess() {
+        String taskName = "Complete Journal Entry";
+        String description = "Finish journal entry for Internship class by 10/10/2022";
+        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
+        Task task = new Task(taskName, description, newUser);
+        newUser.addTask(task);
+        assertNotEquals(0, id);
+        assertNotNull(newUser);
+        assertTrue(userDao.getById(4).equals(newUser));
+        assertEquals(1, newUser.getTasks().size());
+    }
+
+    @Test
     void getByIdSuccess() {
         User retrievedUser = userDao.getById(3);
         assertNotNull(retrievedUser);
