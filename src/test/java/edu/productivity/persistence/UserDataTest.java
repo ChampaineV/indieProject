@@ -39,6 +39,7 @@ class UserDataTest {
         User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
         Task task = new Task(taskName, description, newUser);
         newUser.addTask(task);
+        int id = userDao.insert(newUser);
         assertNotEquals(0, id);
         assertNotNull(newUser);
         assertTrue(userDao.getById(4).equals(newUser));
