@@ -39,7 +39,9 @@ class TaskDataTest {
     }
 
     @Test
-    void getTasksByPropertyLike() {
+    void getTasksByPropertyLikeSuccess() {
+        List<Task> tasks = taskDao.getTasksByPropertyLike("description", " for ");
+        assertEquals(4, tasks.size());
     }
 
     @Test
