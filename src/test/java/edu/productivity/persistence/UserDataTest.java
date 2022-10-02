@@ -1,6 +1,7 @@
 package edu.productivity.persistence;
 
 import edu.productivity.entity.User;
+import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;

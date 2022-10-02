@@ -14,6 +14,7 @@ public class Task {
     private int id;
     private String task_name;
     private String description;
+    @ManyToOne
     private User user;
 
     public Task(){
