@@ -71,6 +71,9 @@ public class Task {
      Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
      */
     @ManyToOne
+    @JoinColumn(name = "user_id",
+            foreignKey = @ForeignKey(name = "USER_ID_FK")
+    )
     public User getUser() {
         return user;
     }
