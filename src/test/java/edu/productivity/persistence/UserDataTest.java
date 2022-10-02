@@ -65,7 +65,7 @@ class UserDataTest {
     }
 
     @Test
-    void getAllSuccess() {
+    void getAllUsersSuccess() {
         List<User> users = userDao.getAll();
         assertEquals(3, users.size());
     }
