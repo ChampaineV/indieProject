@@ -24,7 +24,7 @@ public class User {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
     @Column(name = "password")
     private String password;
@@ -106,6 +106,23 @@ public class User {
         this.dateOfBirth = LocalDate.parse(dateOfBirth);
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void addTask(Task task){
+        tasks.add(task);
+        task.setUser(this);
+    }
+
+    public void removeTask(Task task){
+        tasks.remove(task);
+        task.setUser(null);
+    }
     @Override
     public String toString() {
         return "User{" +
