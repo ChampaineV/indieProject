@@ -1,6 +1,5 @@
 package edu.productivity.persistence;
 
-import edu.productivity.entity.Task;
 import edu.productivity.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,25 +25,10 @@ class UserDataTest {
     }
 
     @Test
-    void insertSuccess() {
+    void insert() {
         User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
         int id = userDao.insert(newUser);
         assertTrue(userDao.getById(id).equals(newUser));
-    }
-
-    @Test
-    void insertWithTaskSuccess() {
-        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
-
-        String taskName = "Research Wireframes";
-        String taskDescription = "Find layouts related to consulting companies";
-        Task task = new Task(taskName, taskDescription, newUser);
-        newUser.addTask(task);
-
-        int id = userDao.insert(newUser);
-        User insertedUser = userDao.getById(id);
-        assertEquals("Felix", insertedUser.getFirstName());
-        assertEquals(1, insertedUser.getTasks().size());
     }
 
     @Test

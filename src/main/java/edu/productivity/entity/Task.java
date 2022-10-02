@@ -1,30 +1,22 @@
 package edu.productivity.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity(name = "Task")
 @Table(name = "task")
 public class Task {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
     private int id;
-    @Column(name = "task_name")
-    private String taskName;
+    private String task_name;
     private String description;
-    @ManyToOne
-    @Column(name = "user_id")
     private User user;
 
     public Task(){
     }
-    public Task(String taskName, String description, User user) {
-        this.taskName = taskName;
+    public Task(String task_name, String description, User user) {
+        this.task_name = task_name;
         this.description = description;
-        this.user = user;
     }
 
     public int getId() {
@@ -36,11 +28,11 @@ public class Task {
     }
 
     public String getTask_name() {
-        return taskName;
+        return task_name;
     }
 
-    public void setTask_name(String taskName) {
-        this.taskName = taskName;
+    public void setTask_name(String task_name) {
+        this.task_name = task_name;
     }
 
     public String getDescription() {
@@ -63,7 +55,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", taskName='" + taskName + '\'' +
+                ", task_name='" + task_name + '\'' +
                 ", description='" + description + '\'' +
                 ", user=" + user +
                 '}';

@@ -51,6 +51,3 @@ fabric.properties
 #Stuff that shouldn't be shown lol
 src/main/resources/database.properties
 src/main/resources/hibernate.cfg.xml
-src/test/resources/database.properties
-src/test/resources/cleandb.sql
-src/test/resources/hibernate.cfg.xml
