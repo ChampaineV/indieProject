@@ -85,6 +85,11 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>5.4.4.Final</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.api-client</groupId>
+      <artifactId>google-api-client</artifactId>
+      <version>1.32.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>indieProject</finalName>
