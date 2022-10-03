@@ -43,7 +43,6 @@ public class TaskData {
      */
     public Task getById(int id) {
         Session session = sessionFactory.openSession();
-
         Task task = session.get(Task.class, id);
         session.close();
         return task;

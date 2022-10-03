@@ -36,7 +36,7 @@ class UserDataTest {
     void insertWithTaskSuccess() {
         String taskName = "Complete Journal Entry";
         String description = "Finish journal entry for Internship class by 10/10/2022";
-        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
+        User newUser = new User(5, "Ebony", "Diaz", "eDiaz", "password5", LocalDate.parse("2001-12-29"));
         Task task = new Task(taskName, description, newUser);
         newUser.addTask(task);
         int id = userDao.insert(newUser);
@@ -49,6 +49,8 @@ class UserDataTest {
     @Test
     void getByIdSuccess() {
         User retrievedUser = userDao.getById(3);
+        logger.info(userDao.getById(2));
+        logger.info(userDao.getById(3));
         assertNotNull(retrievedUser);
         assertTrue(userDao.getById(3).equals(retrievedUser));
     }
@@ -70,10 +72,8 @@ class UserDataTest {
 
     @Test
     void getUsersByPropertyLikeSuccess() {
-        User newUser = new User(4, "Alexis", "Smith", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
-        userDao.insert(newUser);
         List<User> users = userDao.getUsersByPropertyLike("lastName", "Smith");
-        assertEquals(2, users.size());
+        assertEquals(1, users.size());
     }
 
     @Test

@@ -39,7 +39,6 @@ public class UserData {
      */
     public User getById(int id) {
         Session session = sessionFactory.openSession();
-
         User user = session.get(User.class, id);
         session.close();
         return user;
@@ -74,13 +73,13 @@ public class UserData {
         logger.debug("Searching for user with {} = {}",  propertyName, value);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> query = builder.createQuery( User.class );
+        CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
         Expression<String> propertyPath = root.get(propertyName);
 
         query.where(builder.like(propertyPath, "%" + value + "%"));
 
-        List<User> users = session.createQuery( query ).getResultList();
+        List<User> users = session.createQuery(query).getResultList();
         session.close();
         return users;
     }
