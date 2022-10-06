@@ -1,8 +1,10 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="head.jsp"%>
 <html>
 <body>
     <%@include file="nav.jsp"%>
     <main class="p-3">
+        <c:forEach var="user" items="${users}">
         <div class="row row-cols-1 row-cols-md2 g-4">
             <div class="col">
             <div class="card">
