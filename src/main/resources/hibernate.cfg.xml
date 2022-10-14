@@ -1,6 +1,6 @@
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/productivityapp</property>
+        <property name="connection.url">jdbc:mysql://awseb-e-ajuhi25d6q-stack-awsebrdsdatabase-bslk20bftpgc.cez0d6bepdxx.us-east-2.rds.amazonaws.com:3306/productivityapp</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">Leischow</property>
         <property name="connection.password">Soundlessvoice202</property>

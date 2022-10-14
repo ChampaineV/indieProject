@@ -16,7 +16,7 @@
                     <a class="nav-link" href="#">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="loggedIn.jsp">Sign In</a>
+                    <a class="nav-link" href="userTasks">Sign In</a>
                 </li>
             </ul>
         </div>
