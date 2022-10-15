@@ -20,7 +20,7 @@ import java.util.List;
 )
 
 public class UserTasks extends HttpServlet {
-    //TODO: Work on making information and tasks appear that are related to the logged-in user
+
     //TODO: Comment method
     /**
      * Processes the HTTP GET response. Gets the logged-in user's id and searches the database for their information
@@ -32,7 +32,7 @@ public class UserTasks extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //TODO: Work on making information and tasks appear that are related to the logged-in user
         int inputId = 1;
 
         UserData userData = new UserData();

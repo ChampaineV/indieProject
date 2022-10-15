@@ -47,8 +47,20 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Task> tasks = new HashSet<>();
 
+    /**
+     * User main constructor
+     */
     public User() {}
 
+    /**
+     * User constructor
+     * @param id user's Id
+     * @param firstName user's first name
+     * @param lastName user's last name
+     * @param userName user's username
+     * @param password user's password
+     * @param dateOfBirth user's date of birth
+     */
     public User (int id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth) {
         this.id = id;
         this.firstName = firstName;
@@ -58,6 +70,10 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
+    /**
+     * Gets user's Id
+     * @return
+     */
     public int getId() {
         return id;
     }
