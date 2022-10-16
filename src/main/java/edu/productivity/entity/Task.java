@@ -16,6 +16,8 @@ public class Task {
     @Column(name = "task_name")
     private String taskName;
     private String description;
+    @Column(name = "work_time")
+    private String workTime;
     @ManyToOne
     private User user;
 

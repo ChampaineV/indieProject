@@ -22,7 +22,8 @@ public class TaskList {
     private String listName;
     @Column(name = "number_of_tasks")
     private int numberOfTasks;
-    @Column(name = "total_time_spent")
+    @Column(name = "total_work_time")
+    private String totalWorkTime;
     /**
      * Bidirectional @OneToMany
 
