@@ -33,6 +33,7 @@ they've completed in a span of time and understand how well they use their time 
 * [User Stories](DesignDocuments/userStories.md)
 * [Tasks](DesignDocuments/tasks.md)
 * [Screen Design](DesignDocuments/screens.md)
+* [ERD](DesignDocuments/IndieProjectERD.png)
 ### [Project Plan](projectPlan.md)
 
 ### Documentation of Progress
