@@ -30,6 +30,8 @@ public class User {
     private String password;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+    @Column(name = "email")
+    private String email;
     /**
      * Bidirectional @OneToMany
 
@@ -60,14 +62,16 @@ public class User {
      * @param userName user's username
      * @param password user's password
      * @param dateOfBirth user's date of birth
+     * @param email user's email
      */
-    public User (int id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth) {
+    public User (int id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.email = email;
     }
 
     /**
@@ -120,6 +124,14 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = LocalDate.parse(dateOfBirth);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Task> getTasks() {

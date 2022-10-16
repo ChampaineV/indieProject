@@ -27,7 +27,7 @@ class UserDataTest {
 
     @Test
     void insert() {
-        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"));
+        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com");
         int id = userDao.insert(newUser);
         assertTrue(userDao.getById(id).equals(newUser));
     }
@@ -36,7 +36,7 @@ class UserDataTest {
     void insertWithTaskSuccess() {
         String taskName = "Complete Journal Entry";
         String description = "Finish journal entry for Internship class by 10/10/2022";
-        User newUser = new User(5, "Ebony", "Diaz", "eDiaz", "password5", LocalDate.parse("2001-12-29"));
+        User newUser = new User(5, "Ebony", "Diaz", "eDiaz", "password5", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com");
         Task task = new Task(taskName, description, newUser);
         newUser.addTask(task);
         int id = userDao.insert(newUser);
