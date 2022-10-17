@@ -3,7 +3,11 @@ package edu.productivity.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import static java.time.LocalDate.now;
 
 @Entity(name = "Task")
 @Table(name = "task")
@@ -17,9 +21,11 @@ public class Task {
     private String taskName;
     private String description;
     @Column(name = "work_time")
-    private String workTime;
+    private Duration workTime;
     @ManyToOne
     private User user;
+
+    private LocalDate startTime;
 
     public Task(){
     }
@@ -52,6 +58,20 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Duration getWorkTime() {
+        return workTime;
+    }
+
+    public void startTask() {
+        this.startTime = LocalDate.now();
+    }
+    public void endTask() {
+        LocalDate endTime = LocalDate.now();
+
+        Duration workTime = Duration.between(startTime, endTime);
+    }
+
 
     /**
      * Bidirectional @OneToMany
