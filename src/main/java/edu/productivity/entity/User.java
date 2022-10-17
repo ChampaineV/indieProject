@@ -151,6 +151,7 @@ public class User {
         tasks.remove(task);
         task.setUser(null);
     }
+
     @Override
     public String toString() {
         return "User{" +
@@ -159,7 +160,9 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", email='" + email + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 

@@ -1,5 +1,6 @@
 package edu.productivity.persistence;
 
+import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +38,8 @@ class UserDataTest {
         String taskName = "Complete Journal Entry";
         String description = "Finish journal entry for Internship class by 10/10/2022";
         User newUser = new User(5, "Ebony", "Diaz", "eDiaz", "password5", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com");
-        Task task = new Task(taskName, description, newUser);
+        TaskList newTaskList = new TaskList();
+        Task task = new Task(taskName, description, newUser, newTaskList);
         newUser.addTask(task);
         int id = userDao.insert(newUser);
         assertNotEquals(0, id);

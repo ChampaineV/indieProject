@@ -29,7 +29,7 @@ class TaskDataTest {
         User user = userDao.getById(1);
         String taskName = "Organize meeting with group";
         String taskDescription = "Organize a meeting next week to discuss next steps";
-        Task newTask = new Task(taskName, taskDescription, user);
+        Task newTask = new Task(taskName, taskDescription, user, taskList);
         user.addTask(newTask);
         int id = taskDao.insert(newTask);
         assertNotEquals(0, id);

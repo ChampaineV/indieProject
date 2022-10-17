@@ -24,6 +24,8 @@ public class TaskList {
     private int numberOfTasks;
     @Column(name = "total_work_time")
     private String totalWorkTime;
+
+    //TODO: Figure out how to make number of tasks count the number of tasks with the same foreign key tasklist id.
     /**
      * Bidirectional @OneToMany
 
@@ -82,6 +84,11 @@ public class TaskList {
     public void addTask(Task task){
         tasks.add(task);
         task.setUser(this.user);
+    }
+
+    public void removeTask(Task task){
+        tasks.remove(task);
+        task.setUser(null);
     }
 
     /**

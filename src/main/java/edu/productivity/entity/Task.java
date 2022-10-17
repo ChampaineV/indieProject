@@ -30,10 +30,11 @@ public class Task {
 
     public Task(){
     }
-    public Task(String taskName, String description, User user) {
+    public Task(String taskName, String description, User user, TaskList taskList) {
         this.taskName = taskName;
         this.description = description;
         this.user = user;
+        this.taskList = taskList;
     }
 
     public int getId() {
@@ -72,7 +73,6 @@ public class Task {
 
         Duration workTime = Duration.between(startTime, endTime);
     }
-
 
     /**
      * Bidirectional @OneToMany
@@ -144,8 +144,10 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", task_name='" + taskName + '\'' +
+                ", taskName='" + taskName + '\'' +
                 ", description='" + description + '\'' +
+                ", workTime=" + workTime +
+                ", taskList=" + taskList +
                 ", user=" + user +
                 '}';
     }
