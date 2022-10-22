@@ -49,7 +49,8 @@ crashlytics-build.properties
 fabric.properties
 
 #stuff that shouldn't be accessed
-src/test/resources/cleandb.sql
-src/test/resources/database.properties
-src/test/resources/hibernate.cfg.xml
-src/test/resources/log4j2.properties
+src/resources/cleandb.sql
+src/resources/database.properties
+src/resources/hibernate.cfg.xml
+src/resources/log4j2.properties
+src/resources/cognito.properties
