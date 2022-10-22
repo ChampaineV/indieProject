@@ -19,6 +19,12 @@
     <junit-platform-runner-version>1.0.0</junit-platform-runner-version>
     <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
     <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
+    <hibernate-core-version>5.4.4.Final</hibernate-core-version>
+    <hibernate-c3p0-version>5.4.4.Final</hibernate-c3p0-version>
+    <google-api-client-version>2.0.0</google-api-client-version>
+    <java-jwt-version>3.4.1</java-jwt-version>
+    <json-version>20170516</json-version>
+    <commons-io-version>2.11.0</commons-io-version>
   </properties>
   <dependencies>
     <dependency>
@@ -76,19 +82,35 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.4.4.Final</version>
+      <version>${hibernate-core-version}</version>
     </dependency>
     <!-- c3p0 - used to handle connection pooling with hibernate -->
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-c3p0</artifactId>
-      <version>5.4.4.Final</version>
+      <version>${hibernate-c3p0-version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.api-client</groupId>
       <artifactId>google-api-client</artifactId>
-      <version>2.0.0</version>
+      <version>${google-api-client-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>${java-jwt-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>${json-version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons-io-version}</version>
     </dependency>
   </dependencies>
   <build>

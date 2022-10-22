@@ -47,7 +47,7 @@ public class User {
      Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Task> tasks = new HashSet<>();
+    private Set<TaskList> taskLists = new HashSet<>();
 
     /**
      * User main constructor

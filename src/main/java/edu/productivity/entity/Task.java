@@ -28,8 +28,19 @@ public class Task {
     private TaskList taskList;
     private LocalDate startTime;
 
+    /**
+     * Task main constructor
+     */
     public Task(){
     }
+
+    /**
+     * Task constructor
+     * @param taskName task's name
+     * @param description
+     * @param user
+     * @param taskList
+     */
     public Task(String taskName, String description, User user, TaskList taskList) {
         this.taskName = taskName;
         this.description = description;
