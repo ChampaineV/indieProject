@@ -15,6 +15,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sign Up</a>
                 </li>
+        <c:choose>
+            <c:when test="${empty userName}">
+                <li class="nav-item">
+                    <a href = "logIn">Log in</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <h3>Welcome ${userName}</h3>
+            </c:otherwise>
                 <li class="nav-item">
                     <a class="nav-link" href="userTasks">Sign In</a>
                 </li>

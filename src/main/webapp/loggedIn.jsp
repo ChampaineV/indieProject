@@ -4,7 +4,7 @@
 <body>
     <%@include file="nav.jsp"%>
     <main class="p-3">
-        <h1>Hello ${user.firstName} ${user.lastName}!</h1>
+        <h1>Hello ${username}!</h1>
             <div class="row row-cols-1 row-cols-md2 g-4">
                 <div class="col">
                 <div class="card">

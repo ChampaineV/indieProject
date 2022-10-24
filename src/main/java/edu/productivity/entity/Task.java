@@ -38,13 +38,11 @@ public class Task {
      * Task constructor
      * @param taskName task's name
      * @param description
-     * @param user
      * @param taskList
      */
-    public Task(String taskName, String description, User user, TaskList taskList) {
+    public Task(String taskName, String description, TaskList taskList) {
         this.taskName = taskName;
         this.description = description;
-        this.user = user;
         this.taskList = taskList;
     }
 
@@ -85,66 +83,6 @@ public class Task {
         Duration workTime = Duration.between(startTime, endTime);
     }
 
-    /**
-     * Bidirectional @OneToMany
-
-     The bidirectional @OneToMany association also requires a @ManyToOne association on the child side.
-     Although the Domain Model exposes two sides to navigate this association, behind the scenes,
-     the relational database has only one foreign key for this relationship.
-
-     Every bidirectional association must have one owning side only (the child side),
-     the other one being referred to as the inverse (or the mappedBy) side.
-
-     Foreign key is on the child table (Order in this example)
-
-     By default, the @ManyToOne association assumes that the parent-side entity identifier is to be used to join
-     with the client-side entity Foreign Key column.
-
-     However, when using a non-Primary Key association,
-     the column description and foreign key should be used to instruct Hibernate
-     which column should be used on the parent side to establish the many-to-one database relationship.
-
-     Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
-     */
-    @ManyToOne
-    @JoinColumn(name = "user_id",
-            foreignKey = @ForeignKey(name = "USER_ID_FK")
-    )
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * Bidirectional @OneToMany
-     * <p>
-     * The bidirectional @OneToMany association also requires a @ManyToOne association on the child side.
-     * Although the Domain Model exposes two sides to navigate this association, behind the scenes,
-     * the relational database has only one foreign key for this relationship.
-     * <p>
-     * Every bidirectional association must have one owning side only (the child side),
-     * the other one being referred to as the inverse (or the mappedBy) side.
-     * <p>
-     * Foreign key is on the child table (Order in this example)
-     * <p>
-     * By default, the @ManyToOne association assumes that the parent-side entity identifier is to be used to join
-     * with the client-side entity Foreign Key column.
-     * <p>
-     * However, when using a non-Primary Key association,
-     * the column description and foreign key should be used to instruct Hibernate
-     * which column should be used on the parent side to establish the many-to-one database relationship.
-     * <p>
-     * Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
-     *
-     * @return
-     */
-    @ManyToOne
-    @JoinColumn(name = "tasklist_id",
-            foreignKey = @ForeignKey(name = "TASKLIST_ID_FK")
-    )
     public TaskList getTaskList(){return taskList;}
 
     public void setTaskList(TaskList taskList){
@@ -159,7 +97,6 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", workTime=" + workTime +
                 ", taskList=" + taskList +
-                ", user=" + user +
                 '}';
     }
 

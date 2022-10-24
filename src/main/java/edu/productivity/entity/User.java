@@ -134,22 +134,22 @@ public class User {
         this.email = email;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
+    public Set<TaskList> getTaskLists() {
+        return taskLists;
     }
 
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public void setTaskLists(Set<TaskList> taskLists) {
+        this.taskLists = taskLists;
     }
 
-    public void addTask(Task task){
-        tasks.add(task);
-        task.setUser(this);
+    public void addTaskList(TaskList taskList){
+        taskLists.add(taskList);
+        taskList.setUser(this);
     }
 
-    public void removeTask(Task task){
-        tasks.remove(task);
-        task.setUser(null);
+    public void removeTaskList(TaskList taskList){
+        taskLists.remove(taskList);
+        taskList.setUser(null);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
-                ", tasks=" + tasks +
+                ", taskLists=" + taskLists +
                 '}';
     }
 
