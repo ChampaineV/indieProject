@@ -1,6 +1,6 @@
 package edu.productivity.persistence;
 
-import edu.productivity.entity.Task;
+import edu.productivity.entity.TaskList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
- * Data access class to crud tasks.
+ * Data access class to crud taskLists.
  * @author lvang
  */
 public class TaskListData {
@@ -22,66 +22,66 @@ public class TaskListData {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
     /**
-     * Insert task
-     * @param task Task to be inserted
-     * @return the id of the inserted task
+     * Insert taskList
+     * @param taskList TaskList to be inserted
+     * @return the id of the inserted taskList
      */
-    public int insert(Task task) {
+    public int insert(TaskList taskList) {
         int id = 0;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        id = (int)session.save(task);
+        id = (int)session.save(taskList);
         transaction.commit();
         session.close();
         return id;
     }
 
     /**
-     * Get task by id
-     * @param id Task's id
-     * @return task Task with the id
+     * Get taskList by id
+     * @param id TaskList's id
+     * @return taskList TaskList with the id
      */
-    public Task getById(int id) {
+    public TaskList getById(int id) {
         Session session = sessionFactory.openSession();
-        Task task = session.get(Task.class, id);
+        TaskList taskList = session.get(TaskList.class, id);
         session.close();
-        return task;
+        return taskList;
     }
     /**
-     * Update task
-     * @param task Task to be inserted or updated
+     * Update taskList
+     * @param taskList TaskList to be inserted or updated
      */
-    public void saveOrUpdate(Task task) {
+    public void saveOrUpdate(TaskList taskList) {
         Session session = sessionFactory.openSession();
-        session.saveOrUpdate(task);
+        session.saveOrUpdate(taskList);
         session.close();
     }
 
     /**
-     * Delete a task
-     * @param task Task to be deleted
+     * Delete a taskList
+     * @param taskList TaskList to be deleted
      */
-    public void delete(Task task) {
+    public void delete(TaskList taskList) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(task);
+        session.delete(taskList);
         transaction.commit();
         session.close();
     }
 
-    public List<Task> getTasksByPropertyLike(String propertyName, String value) {
+    public List<TaskList> getTasksByPropertyLike(String propertyName, String value) {
         Session session = sessionFactory.openSession();
 
-        logger.debug("Searching for task with {} = {}",  propertyName, value);
+        logger.debug("Searching for taskList with {} = {}",  propertyName, value);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Task> query = builder.createQuery( Task.class );
-        Root<Task> root = query.from(Task.class);
+        CriteriaQuery<TaskList> query = builder.createQuery( TaskList.class );
+        Root<TaskList> root = query.from(TaskList.class);
         Expression<String> propertyPath = root.get(propertyName);
 
         query.where(builder.like(propertyPath, "%" + value + "%"));
 
-        List<Task> tasks = session.createQuery( query ).getResultList();
+        List<TaskList> tasks = session.createQuery( query ).getResultList();
         session.close();
         return tasks;
     }
@@ -90,18 +90,18 @@ public class TaskListData {
      * Returns a list of all the tasks
      * @return list of all the tasks
      */
-    public List<Task> getAllTasks() {
+    public List<TaskList> getAllTaskLists() {
 
         Session session = sessionFactory.openSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Task> query = builder.createQuery(Task.class);
-        Root<Task> root = query.from(Task.class);
-        List<Task> tasks = session.createQuery(query).getResultList();
+        CriteriaQuery<TaskList> query = builder.createQuery(TaskList.class);
+        Root<TaskList> root = query.from(TaskList.class);
+        List<TaskList> taskLists = session.createQuery(query).getResultList();
 
-        logger.debug("The list of tasks " + tasks);
+        logger.debug("The list of taskLists " + taskLists);
         session.close();
 
-        return tasks;
+        return taskLists;
     }
 }

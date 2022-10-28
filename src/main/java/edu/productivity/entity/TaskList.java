@@ -24,6 +24,8 @@ public class TaskList {
     private int numberOfTasks;
     @Column(name = "total_work_time")
     private String totalWorkTime;
+    @Column(name = "description")
+    private String description;
 
     //TODO: Figure out how to make number of tasks count the number of tasks with the same foreign key tasklist id.
     /**
@@ -40,7 +42,7 @@ public class TaskList {
 
      Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
      */
-    @OneToMany(mappedBy = "tasklist", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "taskList", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Task> tasks = new HashSet<>();
 
     /**
@@ -69,9 +71,10 @@ public class TaskList {
 
     public TaskList(){}
 
-    public TaskList(int id, String listName, User user) {
+    public TaskList(int id, String listName, String description, User user) {
         this.id = id;
         this.listName = listName;
+        this.description = description;
         this.user = user;
     }
 
@@ -89,6 +92,14 @@ public class TaskList {
 
     public void setListName(String listName) {
         this.listName = listName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String calculateTotalTimeSpent(){

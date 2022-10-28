@@ -30,7 +30,7 @@ public class User {
     private String password;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-    @Column(name = "email")
+
     private String email;
     /**
      * Bidirectional @OneToMany
@@ -162,7 +162,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
-                ", taskLists=" + taskLists +
+                ", taskLists=" + getTaskLists() +
                 '}';
     }
 

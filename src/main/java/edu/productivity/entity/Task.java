@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -19,14 +20,32 @@ public class Task {
     private int id;
     @Column(name = "task_name")
     private String taskName;
-    private String description;
     @Column(name = "work_time")
     private Duration workTime;
-    @ManyToOne
-    private User user;
+
+    /**
+     * Bidirectional @OneToMany
+
+     The bidirectional @OneToMany association also requires a @ManyToOne association on the child side.
+     Although the Domain Model exposes two sides to navigate this association, behind the scenes,
+     the relational database has only one foreign key for this relationship.
+
+     Every bidirectional association must have one owning side only (the child side),
+     the other one being referred to as the inverse (or the mappedBy) side.
+
+     Foreign key is on the child table (Order in this example)
+
+     By default, the @ManyToOne association assumes that the parent-side entity identifier is to be used to join
+     with the client-side entity Foreign Key column.
+
+     However, when using a non-Primary Key association,
+     the column description and foreign key should be used to instruct Hibernate
+     which column should be used on the parent side to establish the many-to-one database relationship.
+
+     Source: http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-many
+     */
     @ManyToOne
     private TaskList taskList;
-    private LocalDate startTime;
 
     /**
      * Task main constructor
@@ -37,12 +56,12 @@ public class Task {
     /**
      * Task constructor
      * @param taskName task's name
-     * @param description
+     * @param workTime total time worked on the task
      * @param taskList
      */
-    public Task(String taskName, String description, TaskList taskList) {
+    public Task(String taskName, Duration workTime, TaskList taskList) {
         this.taskName = taskName;
-        this.description = description;
+        this.workTime = workTime;
         this.taskList = taskList;
     }
 
@@ -62,25 +81,16 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Duration getWorkTime() {
         return workTime;
     }
+    //TODO: Figure out how to convert Duration to MySQL valueg
 
     public void startTask() {
-        this.startTime = LocalDate.now();
+        //TODO: figure our how to calculate the start time
     }
     public void endTask() {
-        LocalDate endTime = LocalDate.now();
-
-        Duration workTime = Duration.between(startTime, endTime);
+        //TODO: figure out how to calculate the end time and store the duration into the workTime variable
     }
 
     public TaskList getTaskList(){return taskList;}
@@ -94,7 +104,6 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", taskName='" + taskName + '\'' +
-                ", description='" + description + '\'' +
                 ", workTime=" + workTime +
                 ", taskList=" + taskList +
                 '}';

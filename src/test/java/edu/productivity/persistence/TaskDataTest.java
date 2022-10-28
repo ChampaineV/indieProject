@@ -1,12 +1,15 @@
 package edu.productivity.persistence;
 
 import edu.productivity.entity.Task;
+import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,16 +28,14 @@ class TaskDataTest {
 
     @Test
     void insertTaskSuccess() {
-        UserData userDao = new UserData();
-        User user = userDao.getById(1);
+        TaskListData taskListDao = new TaskListData();
+        TaskList taskList = taskListDao.getById(1);
+        Duration minutesWorked = Duration.ofMinutes(60);
         String taskName = "Organize meeting with group";
-        String taskDescription = "Organize a meeting next week to discuss next steps";
-        Task newTask = new Task(taskName, taskDescription, user, taskList);
-        user.addTask(newTask);
+        Task newTask = new Task(taskName, minutesWorked, taskList);
+        taskList.addTask(newTask);
         int id = taskDao.insert(newTask);
         assertNotEquals(0, id);
-        Task insertedTask = taskDao.getById(id);
-        assertTrue(taskDao.getById(id).equals(insertedTask));
     }
 
     @Test
@@ -46,9 +47,9 @@ class TaskDataTest {
 
     @Test
     void saveOrUpdateTasksSuccess() {
-        String newDescription = "Complete next step for indie project before Wednesday";
+        String newTaskName = "Complete next step for indie project before Wednesday";
         Task taskToUpdate = taskDao.getById(3);
-        taskToUpdate.setDescription(newDescription);
+        taskToUpdate.setTaskName(newTaskName);
         taskDao.saveOrUpdate(taskToUpdate);
         Task retrievedTask = taskDao.getById(3);
         assertTrue(taskDao.getById(3).equals(retrievedTask));
@@ -76,7 +77,7 @@ class TaskDataTest {
     void getByIdVerifyUserSuccess() {
         Task retrievedTask = taskDao.getById(1);
         assertNotNull(retrievedTask);
-        assertEquals("Read American History before Saturday", retrievedTask.getDescription());
-        assertEquals("Ellen", retrievedTask.getUser().getFirstName());
+        assertEquals("Read American History before Saturday", retrievedTask.getTaskName());
+        assertEquals("Ellen", retrievedTask.getTaskList().getListName());
     }
 }
