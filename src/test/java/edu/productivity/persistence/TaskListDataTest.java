@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TaskListDataTest {
@@ -37,6 +38,9 @@ class TaskListDataTest {
 
     @Test
     void getById() {
+        TaskList retrievedTaskList = taskListDao.getById(3);
+        assertNotNull(retrievedTaskList);
+        assertTrue(taskListDao.getById(3).equals(retrievedTaskList));
     }
 
     @Test
