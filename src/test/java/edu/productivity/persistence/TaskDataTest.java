@@ -60,21 +60,21 @@ class TaskDataTest {
 
     @Test
     void getTasksByPropertyLikeSuccess() {
-        List<Task> tasks = taskDao.getTasksByPropertyLike("description", " for ");
-        assertEquals(4, tasks.size());
+        List<Task> tasks = taskDao.getTasksByPropertyLike("taskName", "Write ");
+        assertEquals(3, tasks.size());
     }
 
     @Test
     void getAllTasksSuccess() {
         List<Task> tasks = taskDao.getAllTasks();
-        assertEquals(6, tasks.size());
+        assertEquals(9, tasks.size());
     }
 
     @Test
     void getByIdVerifyUserSuccess() {
         Task retrievedTask = taskDao.getById(1);
         assertNotNull(retrievedTask);
-        assertEquals("Read American History before Saturday", retrievedTask.getTaskName());
-        assertEquals("Ellen", retrievedTask.getTaskList().getListName());
+        assertEquals("Read Chapter 16", retrievedTask.getTaskName());
+        assertEquals("Read Book For History Class", retrievedTask.getTaskList().getListName());
     }
 }

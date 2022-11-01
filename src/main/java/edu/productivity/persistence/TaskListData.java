@@ -69,7 +69,7 @@ public class TaskListData {
         session.close();
     }
 
-    public List<TaskList> getTasksByPropertyLike(String propertyName, String value) {
+    public List<TaskList> getTaskListsByPropertyLike(String propertyName, String value) {
         Session session = sessionFactory.openSession();
 
         logger.debug("Searching for taskList with {} = {}",  propertyName, value);

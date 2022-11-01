@@ -15,11 +15,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class tests and checks the UserData methods
+ */
 class UserDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     UserData userDao;
 
+    /**
+     * Sets up test database for test methods
+     */
     @BeforeEach
     void setUp() {
         userDao = new UserData();
@@ -28,6 +34,10 @@ class UserDataTest {
 
     }
 
+    /**
+     * Tests for success when inserting a new user record to the user table. This method creates a new User and inserts
+     * it into the user table. Then, the method will check if the user insert was a success.
+     */
     @Test
     void insertNewUserSuccess() {
         User newUser = new User("Felix", "Montgomery", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com", "fMontgomery", "password4");
@@ -36,6 +46,11 @@ class UserDataTest {
         assertTrue(userDao.getById(id).equals(newUser));
     }
 
+    /**
+     * Tests for success when inserting a new user with a tasklist foreign key to the user table. This method creates
+     * a new User and a new TaskList. The TaskList is added into the User and the User is inserted into the user table.
+     * The method then checks for if there's an unexpected id, the user is null, and the user insert was a success.
+     */
     @Test
     void insertWithTaskListSuccess() {
         String taskListName = "Complete Journal Entry";
@@ -43,8 +58,6 @@ class UserDataTest {
         String minutesWorked = "00:40:00";
         User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz", "password5");
         TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), 1, newUser);
-        logger.info(newUser);
-        logger.info(newTaskList);
         newUser.addTaskList(newTaskList);
         int id = userDao.insert(newUser);
         assertNotEquals(0, id);
@@ -53,15 +66,21 @@ class UserDataTest {
         assertEquals(1, newUser.getTaskLists().size());
     }
 
+    /**
+     * Test for success when getting a user by an id. This method gets the record of an id of 3 from the user table and
+     * checks if the retrieved user is not null and if the getBy was a success.
+     */
     @Test
     void getByIdSuccess() {
         User retrievedUser = userDao.getById(3);
-        logger.info(userDao.getById(2));
-        logger.info(userDao.getById(3));
         assertNotNull(retrievedUser);
         assertTrue(userDao.getById(3).equals(retrievedUser));
     }
 
+    /**
+     * Test for success when saving or updating a record in the user table. This method changes the last name of the
+     * user of an id of 1, and checks if the update was a success.
+     */
     @Test
     void saveOrUpdateSuccess() {
         String newLastName = "Rockwell";
@@ -71,18 +90,29 @@ class UserDataTest {
         assertTrue(userDao.getById(1).equals(user));
     }
 
+    /**
+     * Tests for success when deleting a record from the user table. This method deletes the record of an id of 3, and
+     * checks if delete was a success.
+     */
     @Test
     void deleteSuccess() {
         userDao.delete(userDao.getById(3));
         assertNull(userDao.getById(3));
     }
 
+    /**
+     * Tests for success when getting records of a specific property from the user table.
+     * This method asks for "lastname" of "Smith" and checks if the number of records is equal to the expected size.
+     */
     @Test
     void getUsersByPropertyLikeSuccess() {
         List<User> users = userDao.getUsersByPropertyLike("lastName", "Smith");
         assertEquals(1, users.size());
     }
 
+    /**
+     * Tests for success when getting all the records from the user table
+     */
     @Test
     void getAllUsersSuccess() {
         List<User> users = userDao.getAll();
