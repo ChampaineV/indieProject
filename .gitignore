@@ -56,3 +56,4 @@ src/main/resources/log4j2.properties
 src/main/resources/cognito.properties
 src/test/resources/hibernate.cfg.xml
 scr/test/resources/database.properties
+logs/indieProject.log

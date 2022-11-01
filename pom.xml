@@ -128,12 +128,12 @@
           <configuration>
             <webResources>
               <resource>
-                <directory>src/main/.platform</directory>
+                <directory>src\main\.platform</directory>
                 <targetPath>.platform</targetPath>
                 <filtering>true</filtering>
               </resource>
               <resource>
-                <directory>src/main/.ebextensions</directory>
+                <directory>src\main\.ebextensions</directory>
                 <targetPath>.ebextensions</targetPath>
                 <filtering>true</filtering>
               </resource>
