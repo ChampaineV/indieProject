@@ -37,14 +37,19 @@ class TaskListDataTest {
     }
 
     @Test
-    void getById() {
+    void getByIdSuccess() {
         TaskList retrievedTaskList = taskListDao.getById(3);
         assertNotNull(retrievedTaskList);
         assertTrue(taskListDao.getById(3).equals(retrievedTaskList));
     }
 
     @Test
-    void saveOrUpdate() {
+    void saveOrUpdateSuccess() {
+        String newListName = "Design Vision/Moodboard";
+        TaskList toUpdateTaskList =  taskListDao.getById(5);
+        toUpdateTaskList.setListName(newListName);
+        taskListDao.saveOrUpdate(toUpdateTaskList);
+        assertTrue(taskListDao.getById(5).equals(toUpdateTaskList));
     }
 
     @Test

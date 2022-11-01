@@ -83,7 +83,7 @@ class UserDataTest {
      */
     @Test
     void saveOrUpdateSuccess() {
-        String newLastName = "Rockwell";
+        String newLastName = "Design Vision/Moodboard";
         User user =  userDao.getById(1);
         user.setLastName(newLastName);
         userDao.saveOrUpdate(user);
