@@ -1,5 +1,6 @@
 package edu.productivity.persistence;
 
+import edu.productivity.entity.Task;
 import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,10 +60,14 @@ class TaskListDataTest {
     }
 
     @Test
-    void getTasksByPropertyLike() {
+    void getTaskListByPropertyLike() {
+        List<TaskList> taskLists = taskListDao.getTaskListsByPropertyLike("listName", " Class");
+        assertEquals(3, taskLists.size());
     }
 
     @Test
-    void getAllTaskLists() {
+    void getAllTaskListsSuccess() {
+        List<TaskList> taskLists = taskListDao.getAllTaskLists();
+        assertEquals(5, taskLists.size());
     }
 }
