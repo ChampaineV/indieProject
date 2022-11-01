@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.ejb.Local;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -56,7 +57,6 @@ public class User {
 
     /**
      * User constructor
-     * @param id user's Id
      * @param firstName user's first name
      * @param lastName user's last name
      * @param userName user's username
@@ -64,14 +64,14 @@ public class User {
      * @param dateOfBirth user's date of birth
      * @param email user's email
      */
-    public User (int id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth, String email) {
-        this.id = id;
+    public User (String firstName, String lastName, LocalDate dateOfBirth, String email, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.userName = userName;
+        this.password = password;
+
     }
 
     /**
@@ -124,6 +124,16 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = LocalDate.parse(dateOfBirth);
+    }
+
+    public int getAge() {
+        LocalDate curDate = LocalDate.now();
+
+        if ((dateOfBirth != null) && (curDate != null)) {
+            return Period.between(dateOfBirth, curDate).getYears();
+        } else {
+            return 0;
+        }
     }
 
     public String getEmail() {

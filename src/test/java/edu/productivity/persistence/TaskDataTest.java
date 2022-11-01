@@ -2,14 +2,11 @@ package edu.productivity.persistence;
 
 import edu.productivity.entity.Task;
 import edu.productivity.entity.TaskList;
-import edu.productivity.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +27,7 @@ class TaskDataTest {
     void insertTaskSuccess() {
         TaskListData taskListDao = new TaskListData();
         TaskList taskList = taskListDao.getById(1);
-        Duration minutesWorked = Duration.ofMinutes(60);
+        String minutesWorked = "01:00:00";
         String taskName = "Organize meeting with group";
         Task newTask = new Task(taskName, minutesWorked, taskList);
         taskList.addTask(newTask);

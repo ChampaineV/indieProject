@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,11 +24,12 @@ public class TaskList {
     @Column(name = "number_of_tasks")
     private int numberOfTasks;
     @Column(name = "total_work_time")
-    private String totalWorkTime;
+    private LocalTime totalWorkTime;
     @Column(name = "description")
     private String description;
 
     //TODO: Figure out how to make number of tasks count the number of tasks with the same foreign key tasklist id.
+    //TODO: figure out how to get total time of work (not LocalTime)
     /**
      * Bidirectional @OneToMany
 
@@ -71,10 +73,11 @@ public class TaskList {
 
     public TaskList(){}
 
-    public TaskList(int id, String listName, String description, User user) {
-        this.id = id;
+    public TaskList(String listName, String description, LocalTime totalWorkTime, int numberOfTasks, User user) {
         this.listName = listName;
         this.description = description;
+        this.totalWorkTime = totalWorkTime;
+        this.numberOfTasks = numberOfTasks;
         this.user = user;
     }
 
@@ -131,6 +134,18 @@ public class TaskList {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskList{" +
+                "id=" + id +
+                ", listName='" + listName + '\'' +
+                ", numberOfTasks=" + numberOfTasks +
+                ", totalWorkTime='" + totalWorkTime + '\'' +
+                ", description='" + description + '\'' +
+                ", tasks=" + getTasks() +
+                '}';
     }
 
     @Override

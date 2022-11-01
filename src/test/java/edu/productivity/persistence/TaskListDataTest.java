@@ -5,8 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TaskListDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());

@@ -102,7 +102,6 @@ public class Database implements PropertiesLoader {
 
             connect();
             stmt = connection.createStatement();
-
             while (true) {
                 String sql = br.readLine();
                 if (sql == null) {

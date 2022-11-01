@@ -3,9 +3,7 @@ package edu.productivity.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.Objects;
 
 import static java.time.LocalDate.now;
@@ -21,7 +19,7 @@ public class Task {
     @Column(name = "task_name")
     private String taskName;
     @Column(name = "work_time")
-    private Duration workTime;
+    private String workTime;
 
     /**
      * Bidirectional @OneToMany
@@ -59,7 +57,7 @@ public class Task {
      * @param workTime total time worked on the task
      * @param taskList
      */
-    public Task(String taskName, Duration workTime, TaskList taskList) {
+    public Task(String taskName, String workTime, TaskList taskList) {
         this.taskName = taskName;
         this.workTime = workTime;
         this.taskList = taskList;
@@ -81,18 +79,23 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public Duration getWorkTime() {
+    public String getWorkTime() {
         return workTime;
     }
-    //TODO: Figure out how to convert Duration to MySQL valueg
+    //TODO: Figure out how to convert Duration to String value
 
-    public void startTask() {
-        //TODO: figure our how to calculate the start time
+    /* public void setUpTimer() {
+        boolean isTimed = false;
+        LocalTime startTime = LocalTime.now();
+        startTask();
+        endTask(startTime);
     }
-    public void endTask() {
+    public void endTask(LocalTime startTime) {
         //TODO: figure out how to calculate the end time and store the duration into the workTime variable
+        LocalDate endTime = LocalDate.now();
+        Duration.between(startTime, endTime);
     }
-
+    */
     public TaskList getTaskList(){return taskList;}
 
     public void setTaskList(TaskList taskList){
@@ -104,8 +107,7 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", taskName='" + taskName + '\'' +
-                ", workTime=" + workTime +
-                ", taskList=" + taskList +
+                ", workTime=" + workTime + '\'' +
                 '}';
     }
 

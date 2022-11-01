@@ -10,12 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDataTest {
-    //TODO: Complete cleandb.sql
+
     private final Logger logger = LogManager.getLogger(this.getClass());
     UserData userDao;
 
@@ -29,7 +30,8 @@ class UserDataTest {
 
     @Test
     void insertNewUserSuccess() {
-        User newUser = new User(4, "Felix", "Montgomery", "fMontgomery", "password4", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com");
+        User newUser = new User("Felix", "Montgomery", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com", "fMontgomery", "password4");
+        logger.info(newUser.toString());
         int id = userDao.insert(newUser);
         assertTrue(userDao.getById(id).equals(newUser));
     }
@@ -38,13 +40,12 @@ class UserDataTest {
     void insertWithTaskListSuccess() {
         String taskListName = "Complete Journal Entry";
         String description = "Finish journal entry for Internship class by 10/10/2022";
-        String taskName = "Outline completed weekly duties and goals";
-        Duration minutesWorked = Duration.ofMinutes(60);
-        User newUser = new User(5, "Ebony", "Diaz", "eDiaz", "password5", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com");
-        TaskList newTaskList = new TaskList(6, taskListName, description, newUser);
+        String minutesWorked = "00:40:00";
+        User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz", "password5");
+        TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), 1, newUser);
+        logger.info(newUser);
+        logger.info(newTaskList);
         newUser.addTaskList(newTaskList);
-        Task task = new Task(taskName, minutesWorked, newTaskList);
-        newTaskList.addTask(task);
         int id = userDao.insert(newUser);
         assertNotEquals(0, id);
         assertNotNull(newUser);
