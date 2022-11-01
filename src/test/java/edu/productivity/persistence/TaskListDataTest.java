@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListDataTest {
 
@@ -53,7 +52,9 @@ class TaskListDataTest {
     }
 
     @Test
-    void delete() {
+    void deleteTaskListSuccess() {
+        taskListDao.delete(taskListDao.getById(2));
+        assertNull(taskListDao.getById(2));
     }
 
     @Test
