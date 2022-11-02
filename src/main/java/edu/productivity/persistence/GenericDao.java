@@ -4,6 +4,7 @@ import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class GenericDao<T> {
     private Class<T> type;
@@ -27,6 +28,18 @@ public class GenericDao<T> {
         T entity = (T)session.get(type, id);
         session.close();
         return entity;
+    }
+
+    /**
+     * Deletes the entity
+     * @param entity entity to be deleted
+     */
+    public void delete(T entity) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(entity);
+        transaction.commit();
+        session.close();
     }
 
     /**
