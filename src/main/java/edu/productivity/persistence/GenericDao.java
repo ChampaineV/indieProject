@@ -91,6 +91,20 @@ public class GenericDao<T> {
         return list;
     }
 
+    public List<T> getAll() {
+
+        Session session = getSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        List<T> list = session.createQuery(query).getResultList();
+
+        logger.debug("The list of " + list);
+        session.close();
+
+        return list;
+    }
+
     /**
      * Return an open session from the SessionFactory
      * @return
