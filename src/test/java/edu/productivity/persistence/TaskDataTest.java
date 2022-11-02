@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    TaskData taskDao;
+    GenericDao genericDao;
 
     @BeforeEach
     void setUp() {
-        taskDao = new TaskData();
+        genericDao = new GenericDao(Task.class);
         edu.productivity.test.util.Database database = edu.productivity.test.util.Database.getInstance();
         database.runSQL("cleandb.sql");
     }
@@ -31,48 +31,48 @@ class TaskDataTest {
         String taskName = "Organize meeting with group";
         Task newTask = new Task(taskName, minutesWorked, taskList);
         taskList.addTask(newTask);
-        int id = taskDao.insert(newTask);
+        int id = genericDao.insert(newTask);
         assertNotEquals(0, id);
     }
 
     @Test
     void getById() {
-        Task retrievedTask = taskDao.getById(3);
+        Task retrievedTask = (Task) genericDao.getById(3);
         assertNotNull(retrievedTask);
-        assertTrue(taskDao.getById(3).equals(retrievedTask));
+        assertTrue(genericDao.getById(3).equals(retrievedTask));
     }
 
     @Test
     void saveOrUpdateTasksSuccess() {
         String newTaskName = "Complete next step for indie project before Wednesday";
-        Task taskToUpdate = taskDao.getById(3);
+        Task taskToUpdate = (Task) genericDao.getById(3);
         taskToUpdate.setTaskName(newTaskName);
-        taskDao.saveOrUpdate(taskToUpdate);
-        Task retrievedTask = taskDao.getById(3);
-        assertTrue(taskDao.getById(3).equals(retrievedTask));
+        genericDao.saveOrUpdate(taskToUpdate);
+        Task retrievedTask = (Task) genericDao.getById(3);
+        assertTrue(genericDao.getById(3).equals(retrievedTask));
     }
 
     @Test
     void deleteTaskSuccess() {
-        taskDao.delete(taskDao.getById(2));
-        assertNull(taskDao.getById(2));
+        genericDao.delete(genericDao.getById(2));
+        assertNull(genericDao.getById(2));
     }
 
     @Test
     void getTasksByPropertyLikeSuccess() {
-        List<Task> tasks = taskDao.getTasksByPropertyLike("taskName", "Write ");
+        List<Task> tasks = genericDao.getByPropertyLike("taskName", "Write ");
         assertEquals(3, tasks.size());
     }
 
     @Test
     void getAllTasksSuccess() {
-        List<Task> tasks = taskDao.getAllTasks();
+        List<Task> tasks = genericDao.getAll();
         assertEquals(9, tasks.size());
     }
 
     @Test
     void getByIdVerifyUserSuccess() {
-        Task retrievedTask = taskDao.getById(1);
+        Task retrievedTask = (Task) genericDao.getById(1);
         assertNotNull(retrievedTask);
         assertEquals("Read Chapter 16", retrievedTask.getTaskName());
         assertEquals("Read Book For History Class", retrievedTask.getTaskList().getListName());
