@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GenericDao<T> {
     private Class<T> type;
-    private final Logger logger = LogManager.getLogger(this.class());
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * Instantiates Generic DAO
