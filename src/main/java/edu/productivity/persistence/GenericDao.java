@@ -35,6 +35,16 @@ public class GenericDao<T> {
     }
 
     /**
+     * Update an entity
+     * @param entity entity to be inserted or updated
+     */
+    public void saveOrUpdate(T entity) {
+        Session session = getSession();
+        session.saveOrUpdate(entity);
+        session.close();
+    }
+
+    /**
      * Get entity by id
      * @param id entity's id to search by
      * @return as entity
