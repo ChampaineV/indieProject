@@ -19,6 +19,22 @@ public class GenericDao<T> {
     }
 
     /**
+     * Insert an entity by id
+     *
+     * @param entity entity to be inserted
+     * @return entity's id that was inserted
+     */
+    public int insert(T entity) {
+        int id = 0;
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        id = (int)session.save(entity);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    /**
      * Get entity by id
      * @param id entity's id to search by
      * @return as entity
