@@ -1,5 +1,6 @@
 package edu.productivity.persistence;
 
+import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -14,6 +15,18 @@ public class GenericDao<T> {
      */
     public GenericDao(Class<T> type) {
         this.type = type;
+    }
+
+    /**
+     * Get entity by id
+     * @param id entity's id to search by
+     * @return as entity
+     */
+    public <T>T getById(int id) {
+        Session session = getSession();
+        T entity = (T)session.get(type, id);
+        session.close();
+        return entity;
     }
 
     /**
