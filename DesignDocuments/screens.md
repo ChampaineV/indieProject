@@ -7,7 +7,7 @@
 ![Home Page](wireframes/2%20-%20Logged%20In.png)
 
 ### Create a Task List and Tasks page
-![Create Page](wireframes/3%20-%20Create%20TaskList%20&Tasks.png)
+![Create Page](wireframes/3%20-%20Create%20TaskList%20&%20Tasks.png)
 
 ### Edit a Task List and Tasks page
 ![Edit Page](wireframes/4%20-%20Edit%20TaskList%20&Tasks.png)
