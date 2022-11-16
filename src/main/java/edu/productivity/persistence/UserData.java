@@ -43,6 +43,7 @@ public class UserData {
         session.close();
         return user;
     }
+
     /**
      * Update user
      * @param user User to be inserted or updated

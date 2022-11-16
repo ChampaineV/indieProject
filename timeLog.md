@@ -30,4 +30,34 @@ Tasks for this week:
 Tasks for this week: 
 * Learn how to handle One-To-Many relationships, streamline our code, and improve our unit testing. 
 * Read and demo Google Tasks API
-* 
+
+### Week 6
+Tasks for this week:
+* L
+
+### Week 7
+Tasks for this week:
+* L
+
+### Week 8
+Tasks for this week:
+* L
+
+### Week 9
+Tasks for this week:
+* L
+
+### Week 10
+Tasks for this week:
+* L
+
+### Week 11
+Tasks for this week:
+* L
+
+### Week 12
+Tasks for this week:
+* L
+
+
+

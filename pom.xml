@@ -19,6 +19,7 @@
     <junit-platform-runner-version>1.0.0</junit-platform-runner-version>
     <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
     <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
+    <maven-war-plugin-version>3.2.2</maven-war-plugin-version>
     <hibernate-core-version>5.4.4.Final</hibernate-core-version>
     <hibernate-c3p0-version>5.4.4.Final</hibernate-c3p0-version>
     <google-api-client-version>2.0.0</google-api-client-version>
@@ -124,7 +125,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>${maven-war-plugin-version}</version>
           <configuration>
             <webResources>
               <resource>

@@ -31,7 +31,6 @@ they've completed in a span of time and understand how well they use their time 
 * IDE: IntelliJ IDEA 2021.2
 ### Design
 * [User Stories](DesignDocuments/userStories.md)
-* [Tasks](DesignDocuments/tasks.md)
 * [Screen Design](DesignDocuments/screens.md)
 * [ERD](DesignDocuments/IndieProjectERD.png)
 ### [Project Plan](projectPlan.md)

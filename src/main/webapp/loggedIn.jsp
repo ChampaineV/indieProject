@@ -5,25 +5,28 @@
     <%@include file="nav.jsp"%>
     <main class="p-3">
         <h1>Hello ${username}!</h1>
-            <div class="row row-cols-1 row-cols-md2 g-4">
-                <div class="col">
-                <div class="card">
-                    <div class="card-header">${task.taskName}}</div>
-                        <ul class="list-group list-group-flush">
-                        <li class="list-group-item">${task.description}</li>
-                        </ul>
-                    </div>
+<c:choose>
+    <c:when test="${empty taskList}">
+        <h1>Create a TaskList!</h1>
+    </c:when>
+    <c:otherwise>
+        <div class="row row-cols-1 row-cols-md2 g-4">
+        <div class="col">
+        <c:forEach var="tasklist" items="${taskList}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${tasklist.taskName}</h5>
+                    <p class="card-text">${tasklist.description}</p>
                 </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Task List 2</div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                    </ul>
-                </div>
+                <ul class="list-group list-group-flush">
+                    <c:forEach var="taskItem" items="${tasklist.tasks}">
+                        <li class="list-group-item">${taskItem}</li>
+                    </c:forEach>
+                </ul>
             </div>
+        </c:forEach>
+        </div>
+    </c:otherwise>
         </div>
     </main>
 </body>

@@ -2,8 +2,10 @@ package edu.productivity.controller;
 
 import com.sun.xml.bind.v2.TODO;
 import edu.productivity.entity.Task;
+import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import edu.productivity.persistence.TaskData;
+import edu.productivity.persistence.TaskListData;
 import edu.productivity.persistence.UserData;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet(
         urlPatterns = {"/userTasks"}
@@ -32,20 +35,25 @@ public class UserTasks extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO: Work on making information and tasks appear that are related to the logged-in user
+        //TODO: Work on making information and taskLists appear that are related to the logged-in user
+        //TODO: Use GenericDAO
         int inputId = 1;
 
         UserData userData = new UserData();
-        TaskData taskData = new TaskData();
         User userInfo = userData.getById(inputId);
-        Task taskInfo = taskData.getById(inputId);
-        if(userInfo != null && taskInfo != null) {
+        if(userInfo != null) {
             req.setAttribute("user", userInfo);
-            req.setAttribute("task", taskInfo);
+            if ((userInfo.getTaskLists()) != null) {
+                Set<TaskList> taskListInfo = userInfo.getTaskLists();
+                req.setAttribute("taskList", taskListInfo);
+            } else {
+                req.setAttribute("taskList", null);
+            }
         } else {
             req.setAttribute("user", null);
-            req.setAttribute("task", null);
+            req.setAttribute("taskList", null);
         }
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/loggedIn.jsp");
         dispatcher.forward(req, resp);
     }

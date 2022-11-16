@@ -10,10 +10,46 @@
 - [x] user table
 - [x] user dao to add user to db (java class)
 - [x] unit test dao add user functionality
-- [ ] test round trip (front end to back end)
-- [ ] Weekly reflection
+- [x] test round trip (front end to back end)
+- [x] Weekly reflection
 
 ### Week 5
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 6
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 7
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 8
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 9
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 10
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 11
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 12
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 13
+### This week's focus is the User Authentication
+- [ ] ???
+
+### Week 14
 ### This week's focus is the User Authentication
 - [ ] ???
 
