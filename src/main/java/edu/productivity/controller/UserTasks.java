@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class UserTasks extends HttpServlet {
 
-    GenericDao dao;
+
 
     //TODO: Comment method
     /**
@@ -40,20 +40,11 @@ public class UserTasks extends HttpServlet {
 
         int inputId = 1;
 
-        dao = new GenericDao(User.class);
+        GenericDao dao = new GenericDao(User.class);
         User userInfo = (User) dao.getById(inputId);
         Set<TaskList> taskListInfo = userInfo.getTaskLists();
-        if(userInfo != null) {
-            req.setAttribute("user", userInfo);
-            if (taskListInfo != null) {
-                req.setAttribute("taskList", taskListInfo);
-            } else {
-                req.setAttribute("taskList", null);
-            }
-        } else {
-            req.setAttribute("user", null);
-            req.setAttribute("taskList", null);
-        }
+        req.setAttribute("user", userInfo);
+        req.setAttribute("taskList", taskListInfo);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/loggedIn.jsp");
         dispatcher.forward(req, resp);

@@ -27,6 +27,7 @@
         </c:forEach>
         </div>
     </c:otherwise>
+            </c:choose>
         </div>
     </main>
 </body>
