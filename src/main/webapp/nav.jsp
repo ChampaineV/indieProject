@@ -12,16 +12,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
-                </li>
         <c:choose>
             <c:when test="${empty userName}">
                 <li class="nav-item">
-                    <a href = "logIn">Log in</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="userTasks">Sign In</a>
+                    <a href = "logIn">Log in/Sign Up</a>
                 </li>
             </ul>
             </div>

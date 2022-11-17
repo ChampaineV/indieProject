@@ -1,8 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="head.jsp"%>
-<html>
-<body>
-    <%@include file="nav.jsp"%>
     <main class="p-3">
         <h1>Hello ${username}!</h1>
 <c:choose>
@@ -29,6 +25,4 @@
     </c:otherwise>
             </c:choose>
         </div>
-    </main>
-</body>
-</html>
+
