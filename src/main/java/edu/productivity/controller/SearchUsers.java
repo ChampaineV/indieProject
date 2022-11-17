@@ -1,5 +1,7 @@
 package edu.productivity.controller;
 
+import edu.productivity.entity.User;
+import edu.productivity.persistence.GenericDao;
 import edu.productivity.persistence.UserData;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +20,8 @@ import java.io.IOException;
         urlPatterns = {"/searchUser"}
 )
 public class SearchUsers {
+
+    GenericDao dao;
     //TODO: Ask if SearchUser is relevant to the application? Maybe a SearchTasks instead?
     //TODO: Comment method
     /**
@@ -28,11 +32,11 @@ public class SearchUsers {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserData userData = new UserData();
+        dao = new GenericDao(User.class);
         if (req.getParameter("submit").equals("search")) {
-            req.setAttribute("users", userData.getById(Integer.parseInt(req.getParameter("search"))));
+            req.setAttribute("users", dao.getById(Integer.parseInt(req.getParameter("search"))));
         } else {
-            req.setAttribute("users", userData.getAll());
+            req.setAttribute("users", dao.getAll());
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
         dispatcher.forward(req, resp);
