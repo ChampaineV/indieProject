@@ -145,8 +145,7 @@ public class TaskList {
                 ", totalWorkTime=" + totalWorkTime +
                 ", dueDate=" + dueDate +
                 ", description='" + description + '\'' +
-                ", tasks=" + tasks +
-                ", user=" + user +
+                ", tasks=" + getTasks() +
                 '}';
     }
 
