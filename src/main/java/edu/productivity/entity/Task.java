@@ -18,8 +18,8 @@ public class Task {
     private int id;
     @Column(name = "task_name")
     private String taskName;
-    @Column(name = "work_time")
-    private String workTime;
+    @Column(name = "is_complete")
+    private boolean isComplete;
 
     /**
      * Bidirectional @OneToMany
@@ -54,12 +54,12 @@ public class Task {
     /**
      * Task constructor
      * @param taskName task's name
-     * @param workTime total time worked on the task
+     * @param isComplete if task is completed or not
      * @param taskList
      */
-    public Task(String taskName, String workTime, TaskList taskList) {
+    public Task(String taskName, boolean isComplete, TaskList taskList) {
         this.taskName = taskName;
-        this.workTime = workTime;
+        this.isComplete = isComplete;
         this.taskList = taskList;
     }
 
@@ -79,23 +79,14 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public String getWorkTime() {
-        return workTime;
+    public boolean isComplete() {
+        return isComplete;
     }
-    //TODO: Figure out how to convert Duration to String value
 
-    /* public void setUpTimer() {
-        boolean isTimed = false;
-        LocalTime startTime = LocalTime.now();
-        startTask();
-        endTask(startTime);
+    public void setComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
-    public void endTask(LocalTime startTime) {
-        //TODO: figure out how to calculate the end time and store the duration into the workTime variable
-        LocalDate endTime = LocalDate.now();
-        Duration.between(startTime, endTime);
-    }
-    */
+
     public TaskList getTaskList(){return taskList;}
 
     public void setTaskList(TaskList taskList){
@@ -107,7 +98,7 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", taskName='" + taskName + '\'' +
-                ", workTime=" + workTime + '\'' +
+                ", isComplete=" + isComplete + '\'' +
                 '}';
     }
 

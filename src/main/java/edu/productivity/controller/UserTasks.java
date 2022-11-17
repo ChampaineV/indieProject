@@ -44,10 +44,10 @@ public class UserTasks extends HttpServlet {
 
         dao = new GenericDao(User.class);
         User userInfo = (User) dao.getById(inputId);
+        Set<TaskList> taskListInfo = userInfo.getTaskLists();
         if(userInfo != null) {
             req.setAttribute("user", userInfo);
-            if ((userInfo.getTaskLists()) != null) {
-                Set<TaskList> taskListInfo = userInfo.getTaskLists();
+            if (taskListInfo != null) {
                 req.setAttribute("taskList", taskListInfo);
             } else {
                 req.setAttribute("taskList", null);

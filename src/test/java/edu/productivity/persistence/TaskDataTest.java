@@ -27,9 +27,9 @@ class TaskDataTest {
     void insertTaskSuccess() {
         TaskListData taskListDao = new TaskListData();
         TaskList taskList = taskListDao.getById(1);
-        String minutesWorked = "01:00:00";
+        boolean isComplete = false;
         String taskName = "Organize meeting with group";
-        Task newTask = new Task(taskName, minutesWorked, taskList);
+        Task newTask = new Task(taskName, isComplete, taskList);
         taskList.addTask(newTask);
         int id = genericDao.insert(newTask);
         assertNotEquals(0, id);

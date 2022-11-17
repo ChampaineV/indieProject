@@ -57,7 +57,7 @@ class UserDataTest {
         String description = "Finish journal entry for Internship class by 10/10/2022";
         String minutesWorked = "00:40:00";
         User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz", "password5");
-        TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), 1, newUser);
+        TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), LocalDate.parse("2022-12-29"), newUser);
         newUser.addTaskList(newTaskList);
         int id = genericDao.insert(newUser);
         assertNotEquals(0, id);

@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -21,10 +22,10 @@ public class TaskList {
     private int id;
     @Column(name = "list_name")
     private String listName;
-    @Column(name = "number_of_tasks")
-    private int numberOfTasks;
     @Column(name = "total_work_time")
     private LocalTime totalWorkTime;
+    @Column(name = "due_date")
+    private LocalDate dueDate;
     @Column(name = "description")
     private String description;
 
@@ -73,11 +74,11 @@ public class TaskList {
 
     public TaskList(){}
 
-    public TaskList(String listName, String description, LocalTime totalWorkTime, int numberOfTasks, User user) {
+    public TaskList(String listName, String description, LocalTime totalWorkTime, LocalDate dueDate, User user) {
         this.listName = listName;
         this.description = description;
         this.totalWorkTime = totalWorkTime;
-        this.numberOfTasks = numberOfTasks;
+        this.dueDate = dueDate;
         this.user = user;
     }
 
@@ -105,9 +106,9 @@ public class TaskList {
         this.description = description;
     }
 
-    public String calculateTotalTimeSpent(){
 
-        return null;
+    public String calculateTotalTimeSpent(){
+        return "string";
     }
 
     public Set<Task> getTasks() {
@@ -141,10 +142,11 @@ public class TaskList {
         return "TaskList{" +
                 "id=" + id +
                 ", listName='" + listName + '\'' +
-                ", numberOfTasks=" + numberOfTasks +
-                ", totalWorkTime='" + totalWorkTime + '\'' +
+                ", totalWorkTime=" + totalWorkTime +
+                ", dueDate=" + dueDate +
                 ", description='" + description + '\'' +
-                ", tasks=" + getTasks() +
+                ", tasks=" + tasks +
+                ", user=" + user +
                 '}';
     }
 

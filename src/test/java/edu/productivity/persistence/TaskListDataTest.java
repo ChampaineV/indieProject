@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -32,7 +33,7 @@ class TaskListDataTest {
         String taskListName = "Work on Lab 4 - JS";
         String description = "Lab 4 will demonstrate on how to use JavaScript in a HTML file.";
         String minutesWorked = "00:59:00";
-        TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), 1, user);
+        TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), LocalDate.parse("2023-01-29"), user);
         int id = genericDao.insert(newTaskList);
         assertTrue(genericDao.getById(id).equals(newTaskList));
     }
