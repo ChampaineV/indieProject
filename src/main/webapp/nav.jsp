@@ -15,7 +15,7 @@
         <c:choose>
             <c:when test="${empty userName}">
                 <li class="nav-item">
-                    <a href = "logIn">Log in/Sign Up</a>
+                    <a class="nav-link" href="logIn">Log in/Sign Up</a>
                 </li>
             </ul>
             </div>
