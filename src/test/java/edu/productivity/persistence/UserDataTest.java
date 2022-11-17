@@ -21,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    UserData userDao;
 
+    GenericDao genericDao;
     /**
      * Sets up test database for test methods
      */
     @BeforeEach
     void setUp() {
-        userDao = new UserData();
+        genericDao = new GenericDao(User.class);
         edu.productivity.test.util.Database database = edu.productivity.test.util.Database.getInstance();
         database.runSQL("cleandb.sql");
 
@@ -42,8 +42,8 @@ class UserDataTest {
     void insertNewUserSuccess() {
         User newUser = new User("Felix", "Montgomery", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com", "fMontgomery", "password4");
         logger.info(newUser.toString());
-        int id = userDao.insert(newUser);
-        assertTrue(userDao.getById(id).equals(newUser));
+        int id = genericDao.insert(newUser);
+        assertTrue(genericDao.getById(id).equals(newUser));
     }
 
     /**
@@ -59,10 +59,10 @@ class UserDataTest {
         User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz", "password5");
         TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), 1, newUser);
         newUser.addTaskList(newTaskList);
-        int id = userDao.insert(newUser);
+        int id = genericDao.insert(newUser);
         assertNotEquals(0, id);
         assertNotNull(newUser);
-        assertTrue(userDao.getById(id).equals(newUser));
+        assertTrue(genericDao.getById(id).equals(newUser));
         assertEquals(1, newUser.getTaskLists().size());
     }
 
@@ -72,9 +72,9 @@ class UserDataTest {
      */
     @Test
     void getByIdSuccess() {
-        User retrievedUser = userDao.getById(3);
+        User retrievedUser = (User) genericDao.getById(3);
         assertNotNull(retrievedUser);
-        assertTrue(userDao.getById(3).equals(retrievedUser));
+        assertTrue(genericDao.getById(3).equals(retrievedUser));
     }
 
     /**
@@ -84,10 +84,10 @@ class UserDataTest {
     @Test
     void saveOrUpdateSuccess() {
         String newLastName = "Design Vision/Moodboard";
-        User user =  userDao.getById(1);
+        User user =  (User) genericDao.getById(1);
         user.setLastName(newLastName);
-        userDao.saveOrUpdate(user);
-        assertTrue(userDao.getById(1).equals(user));
+        genericDao.saveOrUpdate(user);
+        assertTrue(genericDao.getById(1).equals(user));
     }
 
     /**
@@ -96,8 +96,8 @@ class UserDataTest {
      */
     @Test
     void deleteSuccess() {
-        userDao.delete(userDao.getById(3));
-        assertNull(userDao.getById(3));
+        genericDao.delete(genericDao.getById(3));
+        assertNull(genericDao.getById(3));
     }
 
     /**
@@ -106,7 +106,7 @@ class UserDataTest {
      */
     @Test
     void getUsersByPropertyLikeSuccess() {
-        List<User> users = userDao.getUsersByPropertyLike("lastName", "Smith");
+        List<User> users = genericDao.getByPropertyLike("lastName", "Smith");
         assertEquals(1, users.size());
     }
 
@@ -115,7 +115,7 @@ class UserDataTest {
      */
     @Test
     void getAllUsersSuccess() {
-        List<User> users = userDao.getAll();
+        List<User> users = genericDao.getAll();
         assertEquals(3, users.size());
     }
 }
