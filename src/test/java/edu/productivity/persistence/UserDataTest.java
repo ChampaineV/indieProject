@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class tests and checks the UserData methods
+ * This class tests and checks the dao methods for User
  */
 class UserDataTest {
 

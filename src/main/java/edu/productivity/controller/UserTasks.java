@@ -5,9 +5,7 @@ import edu.productivity.entity.Task;
 import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import edu.productivity.persistence.GenericDao;
-import edu.productivity.persistence.TaskData;
-import edu.productivity.persistence.TaskListData;
-import edu.productivity.persistence.UserData;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -2,7 +2,6 @@ package edu.productivity.controller;
 
 import edu.productivity.entity.User;
 import edu.productivity.persistence.GenericDao;
-import edu.productivity.persistence.UserData;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

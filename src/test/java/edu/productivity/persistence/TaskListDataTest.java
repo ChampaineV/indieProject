@@ -28,8 +28,8 @@ class TaskListDataTest {
 
     @Test
     void insertTaskListSuccess() {
-        UserData userDao = new UserData();
-        User user = userDao.getById(2);
+        GenericDao userDao = new GenericDao(User.class);
+        User user = (User) userDao.getById(2);
         String taskListName = "Work on Lab 4 - JS";
         String description = "Lab 4 will demonstrate on how to use JavaScript in a HTML file.";
         String minutesWorked = "00:59:00";
