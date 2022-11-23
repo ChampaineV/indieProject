@@ -33,7 +33,8 @@ Tasks for this week:
 
 ### Week 6
 Tasks for this week:
-* L
+* Create an AWS account
+* Create application in AWS Elastic Beanstalk
 
 ### Week 7
 Tasks for this week:
@@ -53,11 +54,20 @@ Tasks for this week:
 
 ### Week 11
 Tasks for this week:
-* L
+* Work on adding correct cognito.properties urls
+* Add GenericDao 
+* Delete specific Daos
+* Update test classes to use GenericDao
 
 ### Week 12
 Tasks for this week:
-* L
+* Add/Delete variables in entity classes (Task, TaskList, User)
+* Update test classes to test new variables
+* Update database on MySQL Workbench with new database layout
+
+### Week 13
+Tasks for this week:
+* Work on AWS environment to deploy correctly
 
 
 
