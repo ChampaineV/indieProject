@@ -38,19 +38,19 @@ Tasks for this week:
 
 ### Week 7
 Tasks for this week:
-* L
+* Learn how to utilize AWS Cognito - User sign-up and authentication
 
 ### Week 8
 Tasks for this week:
-* L
+* Learn how to create a RESTful Web Service in IntelliJ
 
 ### Week 9
 Tasks for this week:
-* L
+* Learn how to create and sign own certificate
 
 ### Week 10
 Tasks for this week:
-* L
+* Work on deploying application to elastic beanstalk
 
 ### Week 11
 Tasks for this week:
