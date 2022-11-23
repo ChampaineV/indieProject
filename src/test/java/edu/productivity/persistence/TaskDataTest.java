@@ -15,7 +15,7 @@ class TaskDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     GenericDao genericDao;
-
+    //TODO: cover deleting one-to-many relationships more fully. if a task is deleted, what should happen to the user? What if a user is deleted? Write tests to make sure whatever should happen, does happen.
     @BeforeEach
     void setUp() {
         genericDao = new GenericDao(Task.class);

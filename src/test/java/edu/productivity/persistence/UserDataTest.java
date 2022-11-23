@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDataTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
+    //TODO: cover deleting one-to-many relationships more fully. if a task is deleted, what should happen to the user? What if a user is deleted? Write tests to make sure whatever should happen, does happen.
 
     GenericDao genericDao;
     /**
