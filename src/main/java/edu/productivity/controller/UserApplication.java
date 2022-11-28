@@ -13,7 +13,7 @@ public class UserApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add(SearchTasks.class );
+        h.add(SearchTaskLists.class );
         return h;
     }
 }
