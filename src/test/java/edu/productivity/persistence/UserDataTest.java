@@ -41,7 +41,7 @@ class UserDataTest {
      */
     @Test
     void insertNewUserSuccess() {
-        User newUser = new User("Felix", "Montgomery", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com", "fMontgomery", "password4");
+        User newUser = new User("Felix", "Montgomery", LocalDate.parse("1968-01-01"), "Monty68@yahoo.com", "fMontgomery");
         logger.info(newUser.toString());
         int id = genericDao.insert(newUser);
         assertTrue(genericDao.getById(id).equals(newUser));
@@ -57,7 +57,7 @@ class UserDataTest {
         String taskListName = "Complete Journal Entry";
         String description = "Finish journal entry for Internship class by 10/10/2022";
         String minutesWorked = "00:40:00";
-        User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz", "password5");
+        User newUser = new User("Ebony", "Diaz", LocalDate.parse("2001-12-29"), "eDiaz@gmail.com", "eDiaz");
         TaskList newTaskList = new TaskList(taskListName, description, LocalTime.parse(minutesWorked), LocalDate.parse("2022-12-29"), newUser);
         newUser.addTaskList(newTaskList);
         int id = genericDao.insert(newUser);
@@ -84,7 +84,7 @@ class UserDataTest {
      */
     @Test
     void saveOrUpdateSuccess() {
-        String newLastName = "Design Vision/Moodboard";
+        String newLastName = "Blanchette";
         User user =  (User) genericDao.getById(1);
         user.setLastName(newLastName);
         genericDao.saveOrUpdate(user);

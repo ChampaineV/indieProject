@@ -58,11 +58,10 @@ public class User {
      * @param firstName user's first name
      * @param lastName user's last name
      * @param userName user's username
-     * @param password user's password
      * @param dateOfBirth user's date of birth
      * @param email user's email
      */
-    public User (String firstName, String lastName, LocalDate dateOfBirth, String email, String userName, String password) {
+    public User (String firstName, String lastName, LocalDate dateOfBirth, String email, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
