@@ -82,6 +82,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         if (authCode == null) {
             //TODO: forward to an error page or back to the login
+            String errorUrl = "/error";
+            resp.sendRedirect(errorUrl);
         } else {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {

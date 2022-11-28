@@ -27,8 +27,6 @@ public class User {
     private String lastName;
     @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
-    @Column(name = "password")
-    private String password;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
@@ -70,8 +68,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.userName = userName;
-        this.password = password;
-
     }
 
     /**
@@ -108,14 +104,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public LocalDate getDateOfBirth() {
@@ -169,7 +157,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
                 ", taskLists=" + getTaskLists() +

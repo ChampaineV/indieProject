@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A servlet that'll add the user to the database.
+ * A servlet that'll get all the user's task lists.
  * @author lvang
  */
 
