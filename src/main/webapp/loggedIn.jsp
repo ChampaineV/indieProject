@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <main class="p-3">
-        <h1>Hello ${username}!</h1>
+        <h1>Hello ${userName}!</h1>
 <c:choose>
     <c:when test="${empty taskList}">
         <h1>Create a TaskList!</h1>

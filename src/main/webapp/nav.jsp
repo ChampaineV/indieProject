@@ -17,10 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="logIn">Log in/Sign Up</a>
                 </li>
-            </ul>
-            </div>
             </c:when>
             <c:otherwise>
+                <li class="nav-item">
+                    <a class="nav-link" href="createNewTaskList">Create a New Task List</a>
+                </li>
                 </ul>
                 </div>
                 <h3>Welcome ${userName}</h3>
