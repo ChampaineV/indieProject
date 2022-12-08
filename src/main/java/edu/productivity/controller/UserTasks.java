@@ -23,8 +23,6 @@ import java.util.Set;
 
 public class UserTasks extends HttpServlet {
 
-
-
     //TODO: Comment method
     /**
      * Processes the HTTP GET response. Gets the logged-in user's id and searches the database for their information

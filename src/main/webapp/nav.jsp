@@ -20,7 +20,7 @@
             </c:when>
             <c:otherwise>
                 <li class="nav-item">
-                    <a class="nav-link" href="createNewTaskList">Create a New Task List</a>
+                    <a class="nav-link" href="createNewTaskList.jsp">Create a New Task List</a>
                 </li>
                 </ul>
                 </div>

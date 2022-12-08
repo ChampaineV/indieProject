@@ -1,9 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <main class="p-3">
-        <h1>Hello ${userName}!</h1>
 <c:choose>
     <c:when test="${empty taskList}">
-        <h1>Create a TaskList!</h1>
+        <h1>No task lists available. Create a new task list to get started!</h1>
     </c:when>
     <c:otherwise>
         <div class="row row-cols-1 row-cols-md2 g-4">
