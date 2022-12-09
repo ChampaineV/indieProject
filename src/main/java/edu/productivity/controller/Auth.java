@@ -7,17 +7,21 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.productivity.auth.*;
+import edu.productivity.entity.User;
+import edu.productivity.persistence.GenericDao;
 import edu.productivity.utilities.PropertiesLoader;
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -78,6 +82,15 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
+        HttpSession session = req.getSession();
+        CLIENT_ID = (String) session.getAttribute("client.id");
+        CLIENT_SECRET = (String) session.getAttribute("client.secret");
+        OAUTH_URL = (String) session.getAttribute("oauthURL");
+        LOGIN_URL = (String) session.getAttribute("loginURL");
+        REDIRECT_URL = (String) session.getAttribute("redirectURL");
+        REGION = (String) session.getAttribute("region");
+        POOL_ID = (String) session.getAttribute("poolId");
+
         String userName = null;
 
         if (authCode == null) {
@@ -85,11 +98,11 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             String errorUrl = "error.jsp";
             resp.sendRedirect(errorUrl);
         } else {
-            HttpRequest authRequest = buildAuthRequest(authCode);
+            HttpRequest authRequest = buildAuthRequest(authCode, session);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
 
-                userName = validate(tokenResponse);
+                userName = validate(tokenResponse, session);
 
                 req.setAttribute("userName", userName);
             } catch (IOException e) {
@@ -142,7 +155,10 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @return
      * @throws IOException
      */
-    private String validate(TokenResponse tokenResponse) throws IOException {
+    private String validate(TokenResponse tokenResponse, HttpSession session) throws IOException {
+        REGION = (String) session.getAttribute("region");
+        POOL_ID = (String) session.getAttribute("poolId");
+
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -180,6 +196,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
+
         logger.debug("here's the username: " + userName);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
@@ -195,7 +212,12 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @param authCode auth code received from Cognito as part of the login process
      * @return the constructed oauth request
      */
-    private HttpRequest buildAuthRequest(String authCode) {
+    private HttpRequest buildAuthRequest(String authCode, HttpSession session) {
+        CLIENT_ID = (String) session.getAttribute("client.id");
+        CLIENT_SECRET = (String) session.getAttribute("client.secret");
+        OAUTH_URL = (String) session.getAttribute("oauthURL");
+        REDIRECT_URL = (String) session.getAttribute("redirectURL");
+
         String keys = CLIENT_ID + ":" + CLIENT_SECRET;
 
         HashMap<String, String> parameters = new HashMap<>();
@@ -240,28 +262,6 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             logger.error("Cannot load json..." + ioException.getMessage(), ioException);
         } catch (Exception e) {
             logger.error("Error loading json" + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Read in the cognito props file and get/set the client id, secret, and required urls
-     * for authenticating a user.
-     */
-    // TODO This code appears in a couple classes, consider using a startup servlet similar to adv java project
-    private void loadProperties() {
-        try {
-            properties = loadProperties("/cognito.properties");
-            CLIENT_ID = properties.getProperty("client.id");
-            CLIENT_SECRET = properties.getProperty("client.secret");
-            OAUTH_URL = properties.getProperty("oauthURL");
-            LOGIN_URL = properties.getProperty("loginURL");
-            REDIRECT_URL = properties.getProperty("redirectURL");
-            REGION = properties.getProperty("region");
-            POOL_ID = properties.getProperty("poolId");
-        } catch (IOException ioException) {
-            logger.error("Cannot load properties..." + ioException.getMessage(), ioException);
-        } catch (Exception e) {
-            logger.error("Error loading properties" + e.getMessage(), e);
         }
     }
 }

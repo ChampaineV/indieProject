@@ -72,7 +72,7 @@ public class LogIn extends HttpServlet implements PropertiesLoader {
             resp.sendRedirect(errorUrl);
             logger.error("Cannot load properties..." + ioException.getMessage(), ioException);
         } catch (Exception e) {
-            String errorUrl = "rror.jsp";
+            String errorUrl = "error.jsp";
             resp.sendRedirect(errorUrl);
             logger.error("Error loading properties" + e.getMessage(), e);
         }

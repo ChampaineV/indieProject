@@ -4,7 +4,7 @@
 <body>
 <%@include file="nav.jsp"%>
 <div class="bg-light p-5 rounded mt-3">
-<form class="my-3" action="createNewTaskList" method="POST">
+<form class="my-3" action="userTasks" method="POST">
     <h2>Create A New Task List</h2>
     <div class="row mb-3">
         <label for="taskName" class="col-sm-2 col-form-label">Task List Name</label>
@@ -26,7 +26,6 @@
                 <li class="list-group-item"><input type="text" name="newTask" id="newTask" size="40"/><button class="btn" onclick="addTask();"><i class="bi bi-plus-lg"></i></button></li>
             </ul>
         </div>
-
         <input class="btn btn-success mt-3" type="submit" name="reportType" value="Create New Task List"/>
 </form>
 </div>
