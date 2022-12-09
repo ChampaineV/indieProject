@@ -14,10 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Database implements PropertiesLoader {
-    // create an object of the class Database
     private static Database instance = new Database();
-
-    // create an object of the class Logger
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     private Properties properties;

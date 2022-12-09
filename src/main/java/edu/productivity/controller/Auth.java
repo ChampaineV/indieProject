@@ -197,6 +197,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
 
+
         logger.debug("here's the username: " + userName);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
@@ -249,8 +250,10 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @see Keys
      * @see KeysItem
      */
-    private void loadKey() {
+    private void loadKey(HttpSession session) {
         ObjectMapper mapper = new ObjectMapper();
+        REGION = (String) session.getAttribute("region");
+        POOL_ID = (String) session.getAttribute("poolId");
 
         try {
             URL jwksURL = new URL(String.format("https://cognito-idp.%s.amazonaws.com/%s/.well-known/jwks.json", REGION, POOL_ID));
