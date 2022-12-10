@@ -47,7 +47,7 @@ public class UserTasks extends HttpServlet {
         clientDao.getUserInfoById(client);
 
         GenericDao dao = new GenericDao(User.class);
-        User userInfo = (User) dao.getById();
+        User userInfo = (User) dao.getById(1);
         Set<TaskList> taskListInfo = userInfo.getTaskLists();
         req.setAttribute("user", userInfo);
         req.setAttribute("taskList", taskListInfo);

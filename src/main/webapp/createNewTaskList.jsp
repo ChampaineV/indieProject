@@ -3,7 +3,7 @@
 <html lang="en">
 <body>
 <%@include file="nav.jsp"%>
-<div class="bg-light p-5 rounded mt-3">
+<div class="bg-light p-5 rounded mt-3 container">
 <form class="my-3" action="userTasks" method="POST">
     <h2>Create A New Task List</h2>
     <div class="row mb-3">
@@ -21,11 +21,20 @@
         </div>
     </div>
     <h3>Create Tasks</h3>
+    <div class="container">
         <div class="row">
-            <ul class="list-group">
-                <li class="list-group-item"><input type="text" name="newTask" id="newTask" size="40"/><button class="btn" onclick="addTask();"><i class="bi bi-plus-lg"></i></button></li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="input-group">
+                        <button class="btn btn-primary" type="button" id="button-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="addTask();" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg></button>
+                        <input type="text" name="newTask" id="newTask" class="form-control">
+                    </div>
+                </li>
             </ul>
         </div>
+    </div>
         <input class="btn btn-success mt-3" type="submit" name="reportType" value="Create New Task List"/>
 </form>
 </div>
