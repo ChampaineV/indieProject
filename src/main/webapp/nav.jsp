@@ -13,18 +13,18 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
         <c:choose>
-            <c:when test="${empty userName}">
+            <c:when test="${empty userInfo}">
                 <li class="nav-item">
                     <a class="nav-link" href="logIn">Log in/Sign Up</a>
                 </li>
             </c:when>
             <c:otherwise>
                 <li class="nav-item">
-                    <a class="nav-link" href="createNewTaskList.jsp">Create a New Task List</a>
+                    <a class="nav-link" href="newTaskListForm.jsp">Create a New Task List</a>
                 </li>
                 </ul>
                 </div>
-                <h3>Welcome ${userName}</h3>
+                <h3>Welcome ${userInfo[1]}</h3>
             </c:otherwise>
     </c:choose>
             </div>

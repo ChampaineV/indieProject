@@ -7,12 +7,15 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.productivity.auth.*;
+import edu.productivity.entity.User;
+import edu.productivity.persistence.GenericDao;
 import edu.productivity.utilities.PropertiesLoader;
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,9 +38,8 @@ import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Properties;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -62,6 +64,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
     HttpSession session;
 
+    List userInfo;
+
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     @Override
@@ -81,6 +85,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
+        GenericDao userDao = new GenericDao<>(User.class);
+        HttpSession session = req.getSession();
+        ServletContext context = getServletContext();
         String userName = null;
 
         if (authCode == null) {
@@ -92,9 +99,28 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
 
-                userName = validate(tokenResponse);
+                userInfo = validate(tokenResponse);
 
-                req.setAttribute("userName", userName);
+                userName = (String) userInfo.get(0);
+                userName = userName.substring(0, 1).toUpperCase() + userName.substring(1);
+
+                List<User> users = userDao.getByPropertyLike("userName", userName);
+
+                if (users.isEmpty()) {
+                    User newUser = new User(String.valueOf(userInfo.get(1)), String.valueOf(userInfo.get(2)), LocalDate.parse(String.valueOf(userInfo.get(3))), String.valueOf(userInfo.get(4)), String.valueOf(userInfo.get(0)));
+                    int id = userDao.insert(newUser);
+                    session.setAttribute("user_id", id);
+                } else {
+                    for(User user : users) {
+                        if(Objects.equals(user.getUserName(), userName)) {
+                            int id  = user.getId();
+                            session.setAttribute("user_id", id);
+                        }
+                    }
+                }
+
+                req.setAttribute("userInfo", userInfo);
+
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 logger.info(authRequest);
@@ -145,7 +171,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @return
      * @throws IOException
      */
-    private String validate(TokenResponse tokenResponse) throws IOException {
+    private List validate(TokenResponse tokenResponse) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -183,6 +209,17 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
+        String firstName = jwt.getClaim("sub:given_name").asString();
+        String lastName = jwt.getClaim("sub:family_name").asString();
+        String dateOfBirth = jwt.getClaim("sub:birthdate").asString();
+        String email = jwt.getClaim("sub:email").asString();
+
+        userInfo = new ArrayList();
+        userInfo.add(userName);
+        userInfo.add(firstName);
+        userInfo.add(lastName);
+        userInfo.add(dateOfBirth);
+        userInfo.add(email);
 
 
         logger.debug("here's the username: " + userName);
@@ -192,7 +229,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // TODO decide what you want to do with the info!
         // for now, I'm just returning username for display back to the browser
 
-        return userName;
+        return userInfo;
     }
 
     /**

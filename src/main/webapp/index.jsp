@@ -4,7 +4,7 @@
 <body>
     <%@include file="nav.jsp"%>
 <c:choose>
-    <c:when test="${empty userName}">
+    <c:when test="${empty userInfo}">
         <h1>Welcome! Sign In!</h1>
     </c:when>
     <c:otherwise>
