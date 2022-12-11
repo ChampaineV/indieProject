@@ -3,7 +3,7 @@
 <html lang="en">
 <body>
 <%@include file="nav.jsp"%>
-< class="bg-light p-5 rounded mt-3 container">
+<div class="bg-light p-5 rounded mt-3 container">
     <c:choose>
         <c:when test="${empty taskList}">
         <form class="my-3" action="createNewTaskList" method="POST">
@@ -22,7 +22,7 @@
                            name="taskName" id="taskDescription"/>
                 </div>
             </div>
-            div class="row mb-3">
+            <div class="row mb-3">
             <label class="col-form-label col-sm-2 pt-0">Due Date</label>
             <div class="col-5">
                 <input type="date" class="form-control"

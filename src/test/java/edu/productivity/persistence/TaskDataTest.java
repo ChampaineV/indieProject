@@ -19,7 +19,6 @@ class TaskDataTest {
     @BeforeEach
     void setUp() {
         genericDao = new GenericDao(Task.class);
-
         edu.productivity.test.util.Database database = edu.productivity.test.util.Database.getInstance();
         database.runSQL("cleandb.sql");
     }
@@ -33,7 +32,6 @@ class TaskDataTest {
         Task newTask = new Task(taskName, isComplete, taskList);
         taskList.addTask(newTask);
         int id = genericDao.insert(newTask);
-        logger.info(genericDao);
         assertNotEquals(0, id);
     }
 
@@ -48,7 +46,6 @@ class TaskDataTest {
     void saveOrUpdateTasksSuccess() {
         String newTaskName = "Complete next step for indie project before Wednesday";
         Task taskToUpdate = (Task) genericDao.getById(3);
-        logger.info(taskToUpdate);
         taskToUpdate.setTaskName(newTaskName);
         genericDao.saveOrUpdate(taskToUpdate);
         Task retrievedTask = (Task) genericDao.getById(3);

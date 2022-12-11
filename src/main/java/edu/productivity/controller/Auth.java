@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +37,8 @@ import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
     HttpSession session;
 
-    List userInfo;
+    List<String> userInfo;
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -120,18 +121,28 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
     /**
      * Checks if the username is found in the database and sets the user information to the session
-     * @param session
+     *
      */
     private void setUserSessionValues(HttpSession session) {
         GenericDao userDao = new GenericDao(User.class);
         String userName = null;
-        userName = (String) userInfo.get(0);
+        userName = userInfo.get(0);
         userName = userName.substring(0, 1).toUpperCase() + userName.substring(1);
 
         List<User> users = userDao.getByPropertyLike("userName", userName);
 
         if (users.isEmpty()) {
-            User newUser = new User(String.valueOf(userInfo.get(1)), String.valueOf(userInfo.get(2)), LocalDate.parse(String.valueOf(userInfo.get(3))), String.valueOf(userInfo.get(4)), String.valueOf(userInfo.get(0)));
+            Date initDate = null;
+            try {
+                initDate = new SimpleDateFormat("dd/MM/yyyy").parse(userInfo.get(3));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String userDob = formatter.format(initDate);
+            logger.info(userDob);
+
+            User newUser = new User(userInfo.get(1), userInfo.get(2), LocalDate.parse(userDob), userInfo.get(4), userInfo.get(0));
             int id = userDao.insert(newUser);
             session.setAttribute("user", userDao.getById(id));
         } else {
@@ -214,12 +225,12 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
-        String firstName = jwt.getClaim("sub:given_name").asString();
-        String lastName = jwt.getClaim("sub:family_name").asString();
-        String dateOfBirth = jwt.getClaim("sub:birthdate").asString();
-        String email = jwt.getClaim("sub:email").asString();
+        String firstName = jwt.getClaim("given_name").asString();
+        String lastName = jwt.getClaim("family_name").asString();
+        String dateOfBirth = jwt.getClaim("birthdate").asString();
+        String email = jwt.getClaim("email").asString();
 
-        userInfo = new ArrayList();
+        userInfo = new ArrayList<>();
         userInfo.add(userName);
         userInfo.add(firstName);
         userInfo.add(lastName);

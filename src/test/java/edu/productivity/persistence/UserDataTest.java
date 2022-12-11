@@ -2,15 +2,17 @@ package edu.productivity.persistence;
 
 import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
-import edu.productivity.entity.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,7 +109,7 @@ class UserDataTest {
      */
     @Test
     void getUsersByPropertyLikeSuccess() {
-        List<User> users = genericDao.getByPropertyLike("lastName", "Smith");
+        List users = genericDao.getByPropertyLike("lastName", "Smith");
         assertEquals(1, users.size());
     }
 
