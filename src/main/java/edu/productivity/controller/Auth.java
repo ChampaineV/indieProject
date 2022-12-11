@@ -127,14 +127,13 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         GenericDao userDao = new GenericDao(User.class);
         String userName = null;
         userName = userInfo.get(0);
-        userName = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-
         List<User> users = userDao.getByPropertyLike("userName", userName);
 
         if (users.isEmpty()) {
             Date initDate = null;
+            String stringDob = userInfo.get(3);
             try {
-                initDate = new SimpleDateFormat("dd/MM/yyyy").parse(userInfo.get(3));
+                initDate = new SimpleDateFormat("dd/MM/yyyy").parse(stringDob);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

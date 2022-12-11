@@ -2,6 +2,39 @@
 <%@include file="head.jsp"%>
 <html lang="en">
 <body>
+<script>
+    function addTask()
+    {
+        let index = [...document.querySelectorAll("li")].length;
+        index++;
+
+        let tasksToBeAdded = document.querySelector("#tasksToBeAdded");
+        let taskName = document.querySelector("#taskName").value;
+        let newTask = document.createElement("li");
+        newTask.id = `task_${index}`;
+        newTask.className = "list-group-item";
+        newTask.innerHTML = taskName;
+
+        let hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "id";
+        hiddenInput.value = `${index}`;
+
+        newTask.appendChild(hiddenInput);
+        tasksToBeAdded.appendChild(newTask);
+    }
+
+    /*function deleteFromList()
+    {
+        const tasks = [...document.querySelectorAll(".task_")];
+
+        tasks.forEach(elem => {
+            if (elem == taskToBeDeleted) {
+                elem.parentNode.removeChild(elem);
+            }
+        });
+    }*/
+</script>
 <%@include file="nav.jsp"%>
 <div class="bg-light p-5 rounded mt-3 container">
     <c:choose>
@@ -19,14 +52,15 @@
                 <label for="taskDescription" class="col-sm-2 col-form-label">Description</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control"
-                           name="taskName" id="taskDescription"/>
+                           name="taskDescription" id="taskDescription"/>
                 </div>
             </div>
             <div class="row mb-3">
             <label class="col-form-label col-sm-2 pt-0">Due Date</label>
             <div class="col-5">
                 <input type="date" class="form-control"
-                       name="taskName" id="taskDueDate"/>
+                       name="taskDueDate" id="taskDueDate"/>
+            </div>
             </div>
             <input class="btn btn-success mt-3" type="submit" name="newTaskList" value="Create New Task List"/>
         </form>
@@ -38,21 +72,26 @@
         <p>Description: ${taskList.description}</p>
         <div class="container">
             <div class="row">
-                <ul class="list-group">
-                    <li class="list-group-item"><input type="text" name="newTask" id="newTask" size="40"/><button class="btn" onclick="addTask();"><i class="bi bi-plus-lg"></i></button></li>
+                <form>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="input-group">
-                                <button class="btn btn-primary" type="button" id="button-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="addTask();" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <button class="btn btn-primary" type="button" id="addNewTask"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="addTask()" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                                 </svg></button>
-                                <input type="text" name="newTask" id="submitNewTask" class="form-control">
+                                <input type="text" name="taskName" id="taskName" class="form-control">
                             </div>
                         </li>
                     </ul>
+                </form>
+            </div>
+            <div class="row">
+                <h3>Your Tasks</h3>
+                <ul id="tasksToBeAdded" class="list-group">
+                </ul>
             </div>
         </div>
-        <input class="btn btn-success mt-3" type="submit" name="createTasks" value="Create New Task List"/>
+        <input class="btn btn-success mt-3" type="submit" name="createTasks"/>
     </form>
 </c:otherwise>
     </c:choose>

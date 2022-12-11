@@ -36,7 +36,7 @@ public class CreateNewTaskList extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
         GenericDao dao = new GenericDao(TaskList.class);

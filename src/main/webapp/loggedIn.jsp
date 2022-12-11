@@ -1,13 +1,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <main class="p-3">
 <c:choose>
-    <c:when test="${empty taskList}">
+    <c:when test="${empty taskLists}">
         <h1>No task lists available. Create a new task list to get started!</h1>
     </c:when>
     <c:otherwise>
         <div class="row row-cols-1 row-cols-md2 g-4">
         <div class="col">
-        <c:forEach var="tasklist" items="${taskList}">
+        <c:forEach var="tasklist" items="${taskLists}">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">${tasklist.taskName}</h5>
