@@ -85,10 +85,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
-        GenericDao userDao = new GenericDao<>(User.class);
         HttpSession session = req.getSession();
-        ServletContext context = getServletContext();
-        String userName = null;
 
         if (authCode == null) {
             //TODO: forward to an error page or back to the login
@@ -101,25 +98,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
                 userInfo = validate(tokenResponse);
 
-                userName = (String) userInfo.get(0);
-                userName = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-
-                List<User> users = userDao.getByPropertyLike("userName", userName);
-
-                if (users.isEmpty()) {
-                    User newUser = new User(String.valueOf(userInfo.get(1)), String.valueOf(userInfo.get(2)), LocalDate.parse(String.valueOf(userInfo.get(3))), String.valueOf(userInfo.get(4)), String.valueOf(userInfo.get(0)));
-                    int id = userDao.insert(newUser);
-                    session.setAttribute("user_id", id);
-                } else {
-                    for(User user : users) {
-                        if(Objects.equals(user.getUserName(), userName)) {
-                            int id  = user.getId();
-                            session.setAttribute("user_id", id);
-                        }
-                    }
-                }
-
-                req.setAttribute("userInfo", userInfo);
+                setUserSessionValues(session);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -137,6 +116,32 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         dispatcher.forward(req, resp);
 
+    }
+
+    /**
+     * Checks if the username is found in the database and sets the user information to the session
+     * @param session
+     */
+    private void setUserSessionValues(HttpSession session) {
+        GenericDao userDao = new GenericDao(User.class);
+        String userName = null;
+        userName = (String) userInfo.get(0);
+        userName = userName.substring(0, 1).toUpperCase() + userName.substring(1);
+
+        List<User> users = userDao.getByPropertyLike("userName", userName);
+
+        if (users.isEmpty()) {
+            User newUser = new User(String.valueOf(userInfo.get(1)), String.valueOf(userInfo.get(2)), LocalDate.parse(String.valueOf(userInfo.get(3))), String.valueOf(userInfo.get(4)), String.valueOf(userInfo.get(0)));
+            int id = userDao.insert(newUser);
+            session.setAttribute("user", userDao.getById(id));
+        } else {
+            for(User user : users) {
+                if(Objects.equals(user.getUserName(), userName)) {
+                    int id  = user.getId();
+                    session.setAttribute("user", userDao.getById(id));
+                }
+            }
+        }
     }
 
     /**

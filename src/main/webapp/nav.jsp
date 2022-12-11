@@ -13,7 +13,7 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
         <c:choose>
-            <c:when test="${empty userInfo}">
+            <c:when test="${empty user}">
                 <li class="nav-item">
                     <a class="nav-link" href="logIn">Log in/Sign Up</a>
                 </li>
@@ -24,7 +24,7 @@
                 </li>
                 </ul>
                 </div>
-                <h3>Welcome ${userInfo[1]}</h3>
+                <h3>Welcome ${user.userName}</h3>
             </c:otherwise>
     </c:choose>
             </div>

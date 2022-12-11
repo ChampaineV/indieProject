@@ -1,7 +1,5 @@
 package edu.productivity.controller;
 
-import com.sun.xml.bind.v2.TODO;
-import edu.productivity.entity.Task;
 import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import edu.productivity.persistence.ClientDao;
@@ -26,12 +24,9 @@ import java.util.List;
 import java.util.Set;
 
 @WebServlet(
-        urlPatterns = {"/userTasks"}
+        urlPatterns = {"/createNewTaskList"}
 )
-
-public class UserTasks extends HttpServlet {
-
-    //TODO: Comment method
+public class CreateNewTaskList extends HttpServlet {
     /**
      * Processes the HTTP GET response. Gets the logged-in user's id and searches the database for their information
      * and tasks.
@@ -40,28 +35,22 @@ public class UserTasks extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    /*
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO: Work on making information and taskLists appear that are related to the logged-in user
         HttpSession session = req.getSession();
-        ServletContext context = getServletContext();
 
         GenericDao dao = new GenericDao(TaskList.class);
-        GenericDao userDao = new GenericDao(User.class);
-        User user = (User) userDao.getById((Integer) session.getAttribute("user_id"));
+        User user = (User) session.getAttribute("user");
         String taskListName = req.getParameter("taskListName");
         String description = req.getParameter("taskDescription");
         String dueDate = req.getParameter("taskDueDate");
         TaskList newTaskList = new TaskList(taskListName, description, LocalTime.now(), LocalDate.parse(dueDate), user);
         int id = dao.insert(newTaskList);
+        TaskList taskList = (TaskList) dao.getById(id);
 
-        req.setAttribute("taskList", newTaskList);
+        req.setAttribute("taskList", taskList);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/createTasks.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/newTaskListForm.jsp");
         dispatcher.forward(req, resp);
     }
-*/
-
 }
