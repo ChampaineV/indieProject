@@ -8,21 +8,26 @@
     <h3>Task List: ${listToEdit.listName}</h3>
     <div class="container">
         <div class="row">
-            <form class="my-3" action="editTaskList" method="POST">
+            <form class="my-3" action="updateTaskList" method="POST">
                 <div class="row">
                     <h3>Your Tasks</h3>
-                    <ul class="list-group">
-                        <c:forEach items="${listToEdit.tasks}" var="task">
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="${task.id}" id="${task.id}">
-                                <label class="form-check-label stretched-link" for="${task.id}">${task.taskName}</label>
-                            </li>
+                    <div>
+                        <c:forEach var="taskItem" items="${listToEdit.tasks}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="${taskItem.id}" name="id" id="${taskItem.id}">
+                                <label class="form-check-label" for="${taskItem.id}">
+                                        ${taskItem.taskName}
+                                </label>
+                            </div>
                         </c:forEach>
-                    </ul>
+                    </div>
                 </div>
+                <c:if test="${messages}">
+                    <p class="text-danger">${messages}</p>
+                </c:if>
                 <div class="container mx-auto">
                     <a class="btn btn-secondary col-4 col-sm-2 mt-3 ms-2" href="/index.jsp" role="button">Cancel</a>
-                    <button class="btn btn-success mt-3 col-4 col-sm-2" type="submit" name="submitNewTasks">Save Edits</button>
+                    <button class="btn btn-success mt-3 col-4 col-sm-2" type="submit" name="submitNewTasks">Save</button>
                 </div>
             </form>
         </div>

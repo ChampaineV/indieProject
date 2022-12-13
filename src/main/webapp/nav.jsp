@@ -20,11 +20,14 @@
             </c:when>
             <c:otherwise>
                 <li class="nav-item">
-                    <a class="nav-link" href="newTaskListForm.jsp">Create a New Task List</a>
+                    <a class="nav-link" href="newTaskListForm.jsp">Create New Task List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success" href="studyZone.jsp">Let's Get To Work!</a>
                 </li>
                 </ul>
                 </div>
-                <h3>Welcome ${user.userName}</h3>
+                <h3>Welcome ${userName}</h3>
             </c:otherwise>
     </c:choose>
             </div>

@@ -151,6 +151,11 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                     int id  = user.getId();
                     Set<TaskList> taskLists = user.getTaskLists();
                     session.setAttribute("user", userDao.getById(id));
+
+                    String name = user.getUserName();
+                    String s1 = name.substring(0, 1).toUpperCase();
+                    String nameCapitalized = s1 + name.substring(1);
+                    session.setAttribute("userName", nameCapitalized);
                     if(!taskLists.isEmpty()){
                         session.setAttribute("taskLists", taskLists);
                     }

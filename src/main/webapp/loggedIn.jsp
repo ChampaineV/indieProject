@@ -2,25 +2,34 @@
 <c:choose>
     <c:when test="${empty taskLists}">
         <main class="p-3">
-        <h1>No task lists available. Create a new task list to get started!</h1>
+        <h1>No task lists available. Create a new task list to get started, ${userName}!</h1>
     </c:when>
     <c:otherwise>
         <c:if test="${not empty addedTaskList}">
             <div class="bg-info p-3">
                 <div class="row">
-                    <h3>The task list, ${addedTaskList.listName}, was created successfully!</h3>
+                    <h3>Task was successfully created!</h3>
+                    <p>Task list created: ${addedTaskList.listName}</p>
                     <p>Number of Tasks Added: ${numberOfTasksAdded}</p>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${not empty listEdited}">
+            <div class="bg-info p-3">
+                <div class="row">
+                    <h3>Task edit was successful!</h3>
+                    <p>The task list, ${listEdited.listName}, was successfully updated!</p>
                 </div>
             </div>
         </c:if>
         <div class="row">
             <c:forEach var="tasklist" items="${taskLists}">
-                <div class="col-6 m-3">
+                <div class="col-sm-6 col-lg-3 m-3">
                     <div class="card rounded">
                         <div class="card-body bg-primary">
                             <div class="d-flex">
                                 <div class="text-white">
-                                    <h5 class="card-title">${tasklist.listNamegit }</h5>
+                                    <h5 class="card-title">${tasklist.listName}</h5>
                                     <p class="card-text">${tasklist.description}</p>
                                 </div>
                                 <div class="ms-auto">
@@ -37,7 +46,7 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <c:forEach var="taskItem" items="${tasklist.tasks}">
-                                <li class="list-group-item">${taskItem}</li>
+                                <li class="list-group-item">${taskItem.taskName}</li>
                             </c:forEach>
                         </ul>
                     </div>

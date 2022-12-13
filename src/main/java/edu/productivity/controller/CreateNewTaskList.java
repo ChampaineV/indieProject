@@ -2,27 +2,18 @@ package edu.productivity.controller;
 
 import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
-import edu.productivity.persistence.ClientDao;
-import edu.productivity.persistence.GenericDao;
-import org.checkerframework.checker.units.qual.C;
 
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 @WebServlet(
         urlPatterns = {"/createNewTaskList"}
@@ -39,8 +30,6 @@ public class CreateNewTaskList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
-        GenericDao dao = new GenericDao(TaskList.class);
         User user = (User) session.getAttribute("user");
         String taskListName = req.getParameter("taskListName");
         String description = req.getParameter("taskDescription");

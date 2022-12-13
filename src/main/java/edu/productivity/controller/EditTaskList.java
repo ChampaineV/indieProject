@@ -21,10 +21,15 @@ import java.util.Set;
 public class EditTaskList extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         GenericDao taskListDao = new GenericDao(TaskList.class);
         int taskListToBeEdit = Integer.parseInt(req.getParameter("editList"));
         TaskList taskList = (TaskList) taskListDao.getById(taskListToBeEdit);
-        req.setAttribute("listToEdit", taskList);
+
+        if(session.getAttribute("listToEdit") != null){
+            session.removeAttribute("listToEdit");
+        }
+        session.setAttribute("listToEdit", taskList);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editListForm.jsp");
         dispatcher.forward(req, resp);

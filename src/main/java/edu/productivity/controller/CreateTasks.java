@@ -21,19 +21,24 @@ import java.util.Set;
 public class CreateTasks extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        GenericDao taskDao = new GenericDao(Task.class);
+        GenericDao taskDao = new GenericDao<>(Task.class);
         GenericDao taskListDao = new GenericDao<>(TaskList.class);
+        GenericDao userDao = new GenericDao<>(User.class);
         TaskList taskList = (TaskList) session.getAttribute("newTaskList");
+        User user = (User) session.getAttribute("user");
         boolean isComplete = false;
         int numberOfTasksAdded = 0;
-
         int taskListId = taskListDao.insert(taskList);
 
         for (String taskName : req.getParameterValues("id")) {
             Task task = new Task(taskName, isComplete, taskList);
+            taskList.addTask(task);
             taskDao.insert(task);
             numberOfTasksAdded++;
         }
+        taskListDao.saveOrUpdate(taskList);
+        user.addTaskList(taskList);
+        userDao.saveOrUpdate(user);
 
         TaskList newTaskList = (TaskList) taskListDao.getById(taskListId);
 
@@ -41,7 +46,6 @@ public class CreateTasks extends HttpServlet {
         req.setAttribute("numberOfTasksAdded", numberOfTasksAdded);
 
         session.removeAttribute("newTaskList");
-        User user = (User) session.getAttribute("user");
         Set<TaskList> updateTaskLists = user.getTaskLists();
         session.setAttribute("taskLists", updateTaskLists);
 
