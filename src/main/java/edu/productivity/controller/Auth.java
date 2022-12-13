@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.productivity.auth.*;
+import edu.productivity.entity.TaskList;
 import edu.productivity.entity.User;
 import edu.productivity.persistence.GenericDao;
 import edu.productivity.utilities.PropertiesLoader;
@@ -148,7 +149,11 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             for(User user : users) {
                 if(Objects.equals(user.getUserName(), userName)) {
                     int id  = user.getId();
+                    Set<TaskList> taskLists = user.getTaskLists();
                     session.setAttribute("user", userDao.getById(id));
+                    if(!taskLists.isEmpty()){
+                        session.setAttribute("taskLists", taskLists);
+                    }
                 }
             }
         }

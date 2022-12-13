@@ -5,26 +5,26 @@
 <script>
     function addTask()
     {
-        let index = [...document.querySelectorAll("li")].length;
+        let index = [...document.querySelectorAll("input[type='hidden']")].length;
         index++;
 
         let tasksToBeAdded = document.querySelector("#tasksToBeAdded");
         let taskName = document.querySelector("#taskName").value;
         let newTask = document.createElement("li");
-        newTask.id = `task_${index}`;
+        newTask.id = "task_" + index;
         newTask.className = "list-group-item";
         newTask.innerHTML = taskName;
 
         let hiddenInput = document.createElement("input");
         hiddenInput.type = "hidden";
         hiddenInput.name = "id";
-        hiddenInput.value = `${index}`;
+        hiddenInput.value = taskName;
 
         newTask.appendChild(hiddenInput);
         tasksToBeAdded.appendChild(newTask);
     }
 
-    /*function deleteFromList()
+    /*function removeFromList()
     {
         const tasks = [...document.querySelectorAll(".task_")];
 
@@ -38,7 +38,7 @@
 <%@include file="nav.jsp"%>
 <div class="bg-light p-5 rounded mt-3 container">
     <c:choose>
-        <c:when test="${empty taskList}">
+        <c:when test="${empty newTaskList}">
         <form class="my-3" action="createNewTaskList" method="POST">
             <h2>Create A New Task List</h2>
             <div class="row mb-3">
@@ -66,33 +66,36 @@
         </form>
         </c:when>
 <c:otherwise>
-    <form class="my-3" action="createTasks" method="POST">
-        <h2>Create Tasks</h2>
-        <h3>Task List: ${taskList.listName}</h3>
-        <p>Description: ${taskList.description}</p>
+    <h2>Create Tasks</h2>
+    <h3>Task List: ${newTaskList.listName}</h3>
+    <p>Description: ${newTaskList.description}</p>
+    <div class="container">
+        <div class="row">
+            <form>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="input-group">
+                            <button class="btn btn-primary" type="button" id="addNewTask"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="addTask()" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg></button>
+                            <input type="text" name="taskName" id="taskName" class="form-control"/>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
         <div class="container">
             <div class="row">
-                <form>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="input-group">
-                                <button class="btn btn-primary" type="button" id="addNewTask"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="addTask()" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                </svg></button>
-                                <input type="text" name="taskName" id="taskName" class="form-control">
-                            </div>
-                        </li>
-                    </ul>
+                <form class="my-3" action="createTasks" method="POST">
+                    <div class="row">
+                        <h3>Your Tasks</h3>
+                        <ul id="tasksToBeAdded" class="list-group">
+                        </ul>
+                    </div>
+                    <button class="btn btn-success mt-3" type="submit" name="submitNewTasks">Submit Tasks</button>
                 </form>
             </div>
-            <div class="row">
-                <h3>Your Tasks</h3>
-                <ul id="tasksToBeAdded" class="list-group">
-                </ul>
-            </div>
         </div>
-        <input class="btn btn-success mt-3" type="submit" name="createTasks"/>
-    </form>
 </c:otherwise>
     </c:choose>
 

@@ -69,6 +69,12 @@ class TaskListDataTest {
     }
 
     @Test
+    void getTaskListByPropertyEqualSuccess() {
+        List<TaskList> taskLists = genericDao.getByPropertyEqual("listName", "Read Book For History Class");
+        assertEquals(1, taskLists.size());
+    }
+
+    @Test
     void getAllTaskListsSuccess() {
         List<TaskList> taskLists = genericDao.getAll();
         assertEquals(5, taskLists.size());

@@ -20,6 +20,7 @@ import javax.ws.rs.client.ClientBuilder;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -45,10 +46,8 @@ public class CreateNewTaskList extends HttpServlet {
         String description = req.getParameter("taskDescription");
         String dueDate = req.getParameter("taskDueDate");
         TaskList newTaskList = new TaskList(taskListName, description, LocalTime.now(), LocalDate.parse(dueDate), user);
-        int id = dao.insert(newTaskList);
-        TaskList taskList = (TaskList) dao.getById(id);
 
-        req.setAttribute("taskList", taskList);
+        session.setAttribute("newTaskList", newTaskList);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/newTaskListForm.jsp");
         dispatcher.forward(req, resp);

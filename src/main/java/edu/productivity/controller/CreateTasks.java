@@ -13,32 +13,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Set;
 
 @WebServlet(
         urlPatterns = {"/createTasks"}
 )
 public class CreateTasks extends HttpServlet {
-
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        TaskList taskList = (TaskList) session.getAttribute("taskList");
-        GenericDao dao = new GenericDao(Task.class);
+        GenericDao taskDao = new GenericDao(Task.class);
+        GenericDao taskListDao = new GenericDao<>(TaskList.class);
+        TaskList taskList = (TaskList) session.getAttribute("newTaskList");
         boolean isComplete = false;
         int numberOfTasksAdded = 0;
 
-        for (String id : req.getParameterValues("id")) {
-            String taskName = req.getParameter("task_" + id);
+        int taskListId = taskListDao.insert(taskList);
+
+        for (String taskName : req.getParameterValues("id")) {
             Task task = new Task(taskName, isComplete, taskList);
-            dao.insert(task);
+            taskDao.insert(task);
             numberOfTasksAdded++;
         }
 
+        TaskList newTaskList = (TaskList) taskListDao.getById(taskListId);
+
+        req.setAttribute("addedTaskList", newTaskList);
         req.setAttribute("numberOfTasksAdded", numberOfTasksAdded);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/newTaskListForm.jsp");
+        session.removeAttribute("newTaskList");
+        User user = (User) session.getAttribute("user");
+        Set<TaskList> updateTaskLists = user.getTaskLists();
+        session.setAttribute("taskLists", updateTaskLists);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
     }
+
 }

@@ -97,6 +97,15 @@ public class GenericDao<T> {
         return list;
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     /**
      * Gets all entities
      * @return all the entities
@@ -112,6 +121,25 @@ public class GenericDao<T> {
         logger.debug("The list of " + list);
         session.close();
 
+        return list;
+    }
+
+    /**
+     * Get user by property (exact match)
+     * sample usage: getByPropertyEqual("lastname", "Curry")
+     */
+    public List<T> getByPropertyEqual(String propertyName, String value) {
+        Session session = getSession();
+
+        logger.debug("Searching for user with " + propertyName + " = " + value);
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery( type );
+        Root<T> root = query.from( type );
+        query.select(root).where(builder.equal(root.get(propertyName), value));
+        List<T> list = session.createQuery( query ).getResultList();
+
+        session.close();
         return list;
     }
 
